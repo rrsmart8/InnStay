@@ -1,0 +1,62 @@
+CREATE DATABASE IF NOT EXISTS innstayDB CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE innstayDB;
+
+CREATE TABLE Users (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(50) NOT NULL,
+    Password_User VARCHAR(255) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Role_User VARCHAR(20) NOT NULL,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Hotels (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Name_Hotel VARCHAR(100) NOT NULL,
+    Location_Hotel VARCHAR(150) NOT NULL,
+    Description_Hotel TEXT
+);
+
+CREATE TABLE Rooms (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    Hotel_ID INT NOT NULL,
+    Room_no VARCHAR(10) NOT NULL,
+    Room_type VARCHAR(50) NOT NULL,
+    Price_per_night DECIMAL(10, 2) NOT NULL,
+    Status_Room VARCHAR(20) NOT NULL,
+    FOREIGN KEY (Hotel_ID) REFERENCES Hotels(ID)
+);
+
+CREATE TABLE Bookings (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    User_ID INT NOT NULL,
+    Room_ID INT,
+    Check_in_date DATE NOT NULL,
+    Check_out_date DATE NOT NULL,
+    Status_Booking VARCHAR(20) NOT NULL,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID),
+    FOREIGN KEY (Room_ID) REFERENCES Rooms(ID)
+);
+
+CREATE TABLE Reviews (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    User_ID INT NOT NULL,
+    Room_ID INT NOT NULL,
+    Rating INT CHECK (Rating >= 1 AND Rating <= 5),
+    Comment TEXT,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID),
+    FOREIGN KEY (Room_ID) REFERENCES Rooms(ID)
+);
+
+CREATE TABLE Recommendations (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    User_ID INT NOT NULL,
+    Place VARCHAR(100) NOT NULL,
+    Name_Place VARCHAR(100) NOT NULL,
+    Description_Place TEXT,
+    Location_Place VARCHAR(150) NOT NULL,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID)
+);
