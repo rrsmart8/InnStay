@@ -41,7 +41,6 @@ class Booking(db.Model):
     check_in_date = db.Column('Check_in_date', db.Date, nullable=False)
     check_out_date = db.Column('Check_out_date', db.Date, nullable=False)
     status = db.Column('Status_Booking', db.String(20), nullable=False)
-<<<<<<< HEAD
     created_at = db.Column('Created_at', db.DateTime, server_default=db.func.now())
 
 class Review(db.Model):
@@ -62,6 +61,3 @@ class Recommendation(db.Model):
     description_place = db.Column('Description_Place', db.Text)
     location_place = db.Column('Location_Place', db.String(150), nullable=False)
     created_at = db.Column('Created_at', db.DateTime, server_default=db.func.now())
-=======
-    created_at = db.Column('Created_at', db.DateTime, server_default=db.func.now())
->>>>>>> 3a455251fcecd675375f399a5185f2541e78b98d
