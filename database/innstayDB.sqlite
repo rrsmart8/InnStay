@@ -1,0 +1,61 @@
+-- Author: Victor Mandescu sqlite database InnStay -- 
+
+CREATE TABLE Users (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Username TEXT NOT NULL,
+    Password_User TEXT NOT NULL,
+    Email TEXT NOT NULL,
+    Role_User TEXT NOT NULL,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Hotels (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name_Hotel TEXT NOT NULL,
+    Location_Hotel TEXT NOT NULL,
+    Description_Hotel TEXT
+);
+
+CREATE TABLE Rooms (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Hotel_ID INTEGER NOT NULL,
+    Room_no TEXT NOT NULL,
+    Room_type TEXT NOT NULL,
+    Price_per_night REAL NOT NULL,
+    Status_Room TEXT NOT NULL,
+    FOREIGN KEY (Hotel_ID) REFERENCES Hotels(ID)
+);
+
+CREATE TABLE Bookings (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    User_ID INTEGER NOT NULL,
+    Room_ID INTEGER,
+    Check_in_date DATE NOT NULL,
+    Check_out_date DATE NOT NULL,
+    Status_Booking TEXT NOT NULL,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID),
+    FOREIGN KEY (Room_ID) REFERENCES Rooms(ID)
+);
+
+CREATE TABLE Reviews (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    User_ID INTEGER NOT NULL,
+    Room_ID INTEGER NOT NULL,
+    Rating INTEGER CHECK (Rating >= 1 AND Rating <= 5),
+    Comment TEXT,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID),
+    FOREIGN KEY (Room_ID) REFERENCES Rooms(ID)
+);
+
+CREATE TABLE Recommendations (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    User_ID INTEGER NOT NULL,
+    Place TEXT NOT NULL,
+    Name_Place TEXT NOT NULL,
+    Description_Place TEXT,
+    Location_Place TEXT NOT NULL,
+    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (User_ID) REFERENCES Users(ID)
+);
