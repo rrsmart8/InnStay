@@ -42,3 +42,22 @@ class Booking(db.Model):
     check_out_date = db.Column('Check_out_date', db.Date, nullable=False)
     status = db.Column('Status_Booking', db.String(20), nullable=False)
     created_at = db.Column('Created_at', db.DateTime, server_default=db.func.now())
+
+class Review(db.Model):
+    __tablename__ = 'Reviews'
+    id = db.Column('ID', db.Integer, primary_key=True)
+    user_id = db.Column('User_ID', db.Integer, db.ForeignKey('Users.ID'), nullable=False)
+    room_id = db.Column('Room_ID', db.Integer, db.ForeignKey('Rooms.ID'), nullable=False)
+    rating = db.Column('Rating', db.Integer, nullable=False)
+    comment = db.Column('Comment', db.Text)
+    created_at = db.Column('Created_at', db.DateTime, server_default=db.func.now())
+
+class Recommendation(db.Model):
+    __tablename__ = 'Recommendations'
+    id = db.Column('ID', db.Integer, primary_key=True)
+    user_id = db.Column('User_ID', db.Integer, db.ForeignKey('Users.ID'), nullable=False)
+    place = db.Column('Place', db.String(100), nullable=False)
+    name_place = db.Column('Name_Place', db.String(100), nullable=False)
+    description_place = db.Column('Description_Place', db.Text)
+    location_place = db.Column('Location_Place', db.String(150), nullable=False)
+    created_at = db.Column('Created_at', db.DateTime, server_default=db.func.now())

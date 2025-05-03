@@ -22,7 +22,7 @@ def get_hotels():
     hotels = Hotel.query.all()
     if not hotels:
         return jsonify({"message": "No hotels found"}), 404
-    hotels_list = [{"id": hotel.id, "name": hotel.name, "location": hotel.location} for hotel in hotels]
+    hotels_list = [{"id": hotel.id, "name": hotel.name, "location": hotel.location, "description": hotel.description} for hotel in hotels]
     return jsonify(hotels_list), 200
 
 # @hotels_bp.route("/hotel/<string:hotel_name>", methods=["GET"])

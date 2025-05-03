@@ -42,7 +42,19 @@ def create_app():
 
     from routes.auth import auth_bp
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
+
+    from routes.rooms import rooms_bp
+    app.register_blueprint(rooms_bp, url_prefix="/api/rooms")
     
+    from routes.bookings import bookings_bp
+    app.register_blueprint(bookings_bp, url_prefix="/api/bookings")
+    
+    from routes.reviews import reviews_bp
+    app.register_blueprint(reviews_bp, url_prefix="/api/reviews")
+
+    from routes.recommendations import recommendation_bp
+    app.register_blueprint(recommendation_bp, url_prefix="/api/recommendations")
+
     return app
 
 if __name__ == '__main__':
