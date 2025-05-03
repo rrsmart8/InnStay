@@ -42,6 +42,7 @@ def create_app():
 
     from routes.auth import auth_bp
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
+<<<<<<< HEAD
 
     from routes.rooms import rooms_bp
     app.register_blueprint(rooms_bp, url_prefix="/api/rooms")
@@ -55,6 +56,9 @@ def create_app():
     from routes.recommendations import recommendation_bp
     app.register_blueprint(recommendation_bp, url_prefix="/api/recommendations")
 
+=======
+    
+>>>>>>> 3a455251fcecd675375f399a5185f2541e78b98d
     return app
 
 if __name__ == '__main__':
