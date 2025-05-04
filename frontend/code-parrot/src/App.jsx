@@ -6,6 +6,8 @@ import villaImg from '../../photos/swimming_pool_sunset_beach_villa_baglioni_res
 import BeachVillas from "./BeachVillas";
 import MountainCabins from "./MountainCabins";
 import CentralApartments from "./CentralApartments";
+import Login from "./Login";
+import Register from "./Register";
 import './App.css'
 
 function Home() {
@@ -24,8 +26,8 @@ function Home() {
           <a href="#">Help</a>
         </nav>
         <div className="auth-buttons">
-          <button className="secondary">Log in</button>
-          <button className="primary">Sign up</button>
+          <button className="secondary" onClick={() => navigate("/login")}>Log in</button>
+          <button className="primary" onClick={() => navigate("/register")}>Sign up</button>
         </div>
       </header>
 
@@ -108,6 +110,8 @@ export default function App() {
         <Route path="/beach-villas" element={<BeachVillas />} />
         <Route path="/mountain-cabins" element={<MountainCabins />} />
         <Route path="/central-apartments" element={<CentralApartments />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
