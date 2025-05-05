@@ -63,7 +63,7 @@ struct ListingDetailView: View {
                 }
                 .font(.caption)
             }
-            .padding(.leading)
+            .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
             
             Divider()

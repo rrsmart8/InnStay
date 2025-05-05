@@ -7,30 +7,36 @@
 
 import SwiftUI
 
+enum AuthScreen {
+    case login
+    case signup
+    case explore
+}
+
 struct AuthRouterView: View {
-    @State private var path = NavigationPath()
-    
+    @State private var screen: AuthScreen = .login
+
     var body: some View {
-        NavigationStack(path: $path) {
-            LoginScreen(path: $path)
-                .navigationDestination(for: AuthRoute.self) { route in
-                    switch route {
-                    case .signup:
-                        SignupScreen(path: $path)
-                            .navigationBarBackButtonHidden(true)
-                    case .login:
-                        LoginScreen(path: $path)
-                            .navigationBarBackButtonHidden(true)
-                    }
-                }
+        switch screen {
+        case .login:
+            LoginScreen(onLoginSuccess: {
+                screen = .explore
+            }, onGoToSignup: {
+                screen = .signup
+            })
+        case .signup:
+            SignupScreen(onSignupSuccess: {
+                screen = .explore
+            }, onGoToLogin: {
+                screen = .login
+            })
+        case .explore:
+            ExploreView()
         }
     }
 }
 
-enum AuthRoute: Hashable {
-    case signup
-    case login
-}
+
 #Preview {
     AuthRouterView()
 }

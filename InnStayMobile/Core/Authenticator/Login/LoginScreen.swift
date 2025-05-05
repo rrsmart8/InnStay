@@ -9,11 +9,12 @@ import SwiftUI
 
 struct LoginScreen: View {
     
-    @Binding var path: NavigationPath
-    
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var isPasswordVisible: Bool = false
+    
+    let onLoginSuccess: () -> Void
+    let onGoToSignup: () -> Void
     
     var body: some View {
         VStack(spacing: 32) {
@@ -66,7 +67,7 @@ struct LoginScreen: View {
             // Login Button
             Button {
                 print("Log in tapped")
-                // Trigger view model login here
+                onLoginSuccess()
             } label: {
                 Text("Log In")
                     .fontWeight(.bold)
@@ -91,8 +92,7 @@ struct LoginScreen: View {
             HStack {
                 Text("Don't have an account?")
                 Button("Sign up") {
-                    path = NavigationPath()
-                    path.append(AuthRoute.signup)
+                    onGoToSignup()
                 }
                 .fontWeight(.semibold)
             }
@@ -105,5 +105,8 @@ struct LoginScreen: View {
 }
 
 #Preview {
-    LoginScreen(path: .constant(NavigationPath()))
+    LoginScreen(
+        onLoginSuccess: {},
+        onGoToSignup: {}
+    )
 }

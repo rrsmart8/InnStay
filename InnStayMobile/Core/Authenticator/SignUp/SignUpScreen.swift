@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct SignupScreen: View {
     
-    @Binding var path: NavigationPath
+    let onSignupSuccess: () -> Void
+    let onGoToLogin: () -> Void
+    
     
     @State private var firstName = ""
     @State private var lastName = ""
@@ -67,8 +67,7 @@ struct SignupScreen: View {
                 
                 // Sign Up Button
                 Button {
-                    print("Sign up tapped")
-                    // Add validation or call to view model
+                    onSignupSuccess()
                 } label: {
                     Text("Sign Up")
                         .fontWeight(.bold)
@@ -83,8 +82,7 @@ struct SignupScreen: View {
                 HStack {
                     Text("Already have an account?")
                     Button("Log in") {
-                            path = NavigationPath()
-                            path.append(AuthRoute.login)
+                        onGoToLogin()
                     }
                     .fontWeight(.semibold)
                 }
@@ -114,5 +112,8 @@ struct CustomTextField: View {
 }
 
 #Preview {
-    SignupScreen(path: .constant(NavigationPath()))
+    SignupScreen(
+        onSignupSuccess: {},
+        onGoToLogin: {}
+    )
 }
