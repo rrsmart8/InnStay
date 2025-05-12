@@ -60,6 +60,10 @@ def create_app():
     from routes.recommendations import recommendation_bp
     app.register_blueprint(recommendation_bp, url_prefix="/api/recommendations")
 
+    from routes.search import search_bp
+    app.register_blueprint(search_bp, url_prefix="/api/search")
+
+
     return app
 
 if __name__ == '__main__':
