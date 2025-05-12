@@ -1,0 +1,7 @@
+# Server
+server/__pycache__/
+server/routes/__pycache__/
+
+# Environment
+.env
+venv/
