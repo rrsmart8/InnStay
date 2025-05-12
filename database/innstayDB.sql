@@ -1,341 +1,343 @@
-CREATE TABLE Users (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    Username TEXT NOT NULL,
-    Password_User TEXT NOT NULL,
-    Email TEXT NOT NULL,
-    Role_User TEXT NOT NULL,
-    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- USERS
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    role TEXT NOT NULL CHECK (role IN ('user', 'admin', 'db_admin')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE Hotels (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    Name_Hotel TEXT NOT NULL,
-    Location_Hotel TEXT NOT NULL,
-    Description_Hotel TEXT
+-- HOTELS
+CREATE TABLE hotels (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    location TEXT NOT NULL,
+    description TEXT,
+    image TEXT
 );
 
-CREATE TABLE Rooms (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    Hotel_ID INTEGER NOT NULL,
-    Room_no TEXT NOT NULL,
-    Room_type TEXT NOT NULL,
-    Price_per_night REAL NOT NULL,
-    Status_Room TEXT NOT NULL,
-    FOREIGN KEY (Hotel_ID) REFERENCES Hotels(ID)
+-- HOTEL ADMINS (users assigned to manage hotels)
+CREATE TABLE hotel_admins (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hotel_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE(hotel_id, user_id)
 );
 
-CREATE TABLE Bookings (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    User_ID INTEGER NOT NULL,
-    Room_ID INTEGER,
-    Check_in_date TEXT NOT NULL,
-    Check_out_date TEXT NOT NULL,
-    Status_Booking TEXT NOT NULL,
-    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (User_ID) REFERENCES Users(ID),
-    FOREIGN KEY (Room_ID) REFERENCES Rooms(ID)
+-- ROOMS
+CREATE TABLE rooms (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hotel_id INTEGER NOT NULL,
+    room_no TEXT NOT NULL,
+    room_type TEXT NOT NULL,
+    price_per_night REAL NOT NULL,
+    status TEXT NOT NULL CHECK (status IN ('available', 'booked', 'maintenance')),
+    image TEXT,
+    facilities TEXT,
+    FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Reviews (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    User_ID INTEGER NOT NULL,
-    Room_ID INTEGER NOT NULL,
-    Rating INTEGER CHECK (Rating >= 1 AND Rating <= 5),
-    Comment TEXT,
-    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (User_ID) REFERENCES Users(ID),
-    FOREIGN KEY (Room_ID) REFERENCES Rooms(ID)
+-- BOOKINGS
+CREATE TABLE bookings (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    room_id INTEGER NOT NULL,
+    guests INTEGER NOT NULL,
+    check_in_date DATE NOT NULL,
+    check_out_date DATE NOT NULL,
+    status TEXT NOT NULL CHECK (status IN ('pending', 'confirmed', 'cancelled')),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
 );
 
-CREATE TABLE Recommendations (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    User_ID INTEGER NOT NULL,
-    Place TEXT NOT NULL,
-    Name_Place TEXT NOT NULL,
-    Description_Place TEXT,
-    Location_Place TEXT NOT NULL,
-    Created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (User_ID) REFERENCES Users(ID)
+-- REVIEWS
+CREATE TABLE reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    room_id INTEGER NOT NULL,
+    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
 );
 
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('achang', 'hashed_password', 'greenwilliam@example.com', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('tammy59', 'hashed_password', 'williamcampbell@example.org', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('vanessa89', 'hashed_password', 'kyleblair@example.net', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('thomas15', 'hashed_password', 'ostewart@example.org', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('hramos', 'hashed_password', 'bryan80@example.org', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('ypage', 'hashed_password', 'salazarmaria@example.com', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('jessicapadilla', 'hashed_password', 'leeashley@example.org', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('lindawest', 'hashed_password', 'kaisernancy@example.com', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('turnerkelly', 'hashed_password', 'kelleylisa@example.net', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('tamaramorrison', 'hashed_password', 'sean96@example.com', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('kellylopez', 'hashed_password', 'antoniozavala@example.com', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('rjones', 'hashed_password', 'nancymclean@example.org', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('hmassey', 'hashed_password', 'aimee33@example.net', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('criley', 'hashed_password', 'skeller@example.com', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('nguyendarrell', 'hashed_password', 'megan30@example.net', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('dave35', 'hashed_password', 'marvincabrera@example.org', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('melissarobinson', 'hashed_password', 'johnsoncynthia@example.net', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('myersmitchell', 'hashed_password', 'johnsonandrew@example.org', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('mendozajessica', 'hashed_password', 'gilesandrew@example.com', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('huffchad', 'hashed_password', 'lucasmichael@example.org', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('gordonbenjamin', 'hashed_password', 'lyonspeter@example.com', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('rebecca79', 'hashed_password', 'heidiharris@example.org', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('meganpeterson', 'hashed_password', 'david72@example.org', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('kmaldonado', 'hashed_password', 'deborah64@example.org', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('ellischristian', 'hashed_password', 'stephensdennis@example.com', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('chelsea59', 'hashed_password', 'jenniferhughes@example.com', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('smithjames', 'hashed_password', 'ernest37@example.com', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('sjohnson', 'hashed_password', 'tbarton@example.org', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('seangreen', 'hashed_password', 'seandyer@example.net', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('hensontroy', 'hashed_password', 'mary06@example.org', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('monroedavid', 'hashed_password', 'moraleserika@example.com', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('lewisjennifer', 'hashed_password', 'bairdemma@example.net', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('leecharlene', 'hashed_password', 'morganramirez@example.org', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('alvarezsandra', 'hashed_password', 'johnsonrobin@example.org', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('dennis85', 'hashed_password', 'wigginsjoshua@example.org', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('williamserin', 'hashed_password', 'stacey90@example.net', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('djoseph', 'hashed_password', 'iwatson@example.org', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('nicholascarter', 'hashed_password', 'edwardcook@example.com', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('morganchristine', 'hashed_password', 'nelsonedward@example.net', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('michael82', 'hashed_password', 'danny30@example.com', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('melodychandler', 'hashed_password', 'richard54@example.com', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('garciaregina', 'hashed_password', 'zrogers@example.com', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('mendozaholly', 'hashed_password', 'vjohnson@example.net', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('samanthasims', 'hashed_password', 'odrake@example.org', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('mortonjames', 'hashed_password', 'brucesmith@example.com', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('shane79', 'hashed_password', 'rodneyrichardson@example.com', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('ryanhoward', 'hashed_password', 'shortmelissa@example.org', 'admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('mgoodwin', 'hashed_password', 'crawfordjonathan@example.net', 'user');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('shealaura', 'hashed_password', 'danielellis@example.com', 'hotel_admin');
-INSERT INTO Users (Username, Password_User, Email, Role_User) VALUES ('danielcarlson', 'hashed_password', 'zhernandez@example.net', 'user');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Henderson, Boyd and Shelton Hotel', 'Marthafort', 'Particular despite future while together stand along. Themselves owner choose here.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Johnson, Davis and Bauer Hotel', 'Lake Ronaldborough', 'Top individual win suddenly win parent do. Prevent a consider.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Hale, Patrick and Gomez Hotel', 'New Stevenmouth', 'Likely character allow pay.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Johnson Group Hotel', 'Watsonborough', 'Between similar safe air. Issue indicate market ten foot education good. Grow ahead girl act.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Villarreal and Sons Hotel', 'Rodriguezstad', 'Agreement decade friend which. View when player contain year.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Long Ltd Hotel', 'East Robertside', 'Set discussion seven evidence worker building this. A huge three.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Callahan-Campbell Hotel', 'New Alexandra', 'Guess break about. Their record road dinner seem. Course its respond himself former.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Young Inc Hotel', 'West Brian', 'Particularly partner relate mention expect. In approach recent program possible natural.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Barry-Scott Hotel', 'East Miguelborough', 'Could cut pull save fine team. Lot the drive figure necessary. Leave right answer.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Rodriguez-Lam Hotel', 'Lake Kenneth', 'Theory choice computer yard.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Jimenez, Hardin and Jensen Hotel', 'New Caitlinfort', 'Large center find power road. Him important enough most save rather.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Frye and Sons Hotel', 'Lake Christian', 'Significant now energy. Lay return identify. Anything event yet effect quite reflect upon.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Rivera Ltd Hotel', 'New Lisashire', 'Guy personal follow situation over would. Small notice kind.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Chen, Daniels and Cruz Hotel', 'Bakerport', 'Sing standard exactly election money fish.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Mccoy Ltd Hotel', 'Smithbury', 'Air action economy several hit. Pull recent state old great notice north everything.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Love Ltd Hotel', 'Williamstown', 'Particularly speech mission remember tree care sign. Myself star gas spend.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Blackwell-Lee Hotel', 'Brewerport', 'Over some collection. Impact key page per. Public none sound include air.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Alvarez-Hodge Hotel', 'Gibbsview', 'Believe step four western likely almost training.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Cunningham-Smith Hotel', 'Lake Peterburgh', 'Agent follow about. Since born particularly.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Huang-Sanchez Hotel', 'Walkerfurt', 'Require agree inside thank.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Arnold-Johnson Hotel', 'Adamsborough', 'Next according television next sense make real use. Girl sister their rate drop marriage worker.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Roberts and Sons Hotel', 'Kellerstad', 'Partner story budget great than director. Place grow everyone win should research.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Marshall-Murray Hotel', 'Lake Reginald', 'Discussion military ability line hour wear star. Worker offer American behavior customer force.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Gonzalez-Smith Hotel', 'Jonesburgh', 'Up high southern job high. Past especially old.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Harrison-Gibson Hotel', 'Davidview', 'President outside upon why mission because. Usually piece but arrive garden.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Stein-Bridges Hotel', 'North Bradley', 'Kitchen purpose difference range technology. International position write those full rate clear.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Fernandez-Schultz Hotel', 'New Dawn', 'Herself Mr bad wide manage. Daughter pay growth. Seat should dream whose.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Reese-Pennington Hotel', 'Port Brittany', 'Choice phone nor. Western month itself history.
-Its professor while seven.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Cooper LLC Hotel', 'Lake Makayla', 'Full need claim many. Pm election case. Party individual so attack.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Dickson-Kelley Hotel', 'East Steven', 'Situation eat thousand. Cause others skill industry old effect fine.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Rose Group Hotel', 'Josephchester', 'Serve can street race seat. Would federal test some score reveal so.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Reese Group Hotel', 'Tracistad', 'Risk throughout citizen drug decide. Seven approach speak. Eat report to product outside they eye.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Briggs, Cunningham and Young Hotel', 'Robinsonhaven', 'Cell our series mother treat structure positive. Else feeling trade money smile create.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Smith-Ewing Hotel', 'North Cathyburgh', 'Hotel matter guy great old. Record should add mother.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Shaw Group Hotel', 'Martinborough', 'Will firm woman section magazine loss. Especially position learn senior today mention.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Kelly, Bryan and Pham Hotel', 'North Cathyberg', 'His within though finish star be. Popular see different decide trip total.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Copeland, Johns and Thomas Hotel', 'Lake Jared', 'Office explain education idea. Ten television model.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Miller and Sons Hotel', 'Shannonfort', 'Two seven lose probably. Strategy receive rate oil. Trial religious your outside wish.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Dunlap-Allen Hotel', 'Claireberg', 'Staff that report sign. Walk two most ten cup far training.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Lowe, Barnes and Thomas Hotel', 'New Lucasbury', 'First thing discuss power safe push country. Majority good open executive experience hotel.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Bennett-Williams Hotel', 'Fitzgeraldfurt', 'Do believe her attorney stock.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Kramer, Bell and Baird Hotel', 'Lake Deanna', 'Democratic radio stay century law before. Structure face forget result professor.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Washington and Sons Hotel', 'Jocelynberg', 'Focus raise away tough subject customer far. Prepare scene house central baby picture.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Combs LLC Hotel', 'Berrystad', 'Management minute air represent. Beat start say either none heavy down business.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Russell, Whitehead and Terrell Hotel', 'East Kimberly', 'Happy last hit poor. Place side member.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Sandoval Group Hotel', 'Marcusborough', 'Address above form debate name may. Threat bill pattern scientist early. Range know close election.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Drake, Chapman and Waller Hotel', 'West Michael', 'Staff week own necessary allow. Throughout society theory happy culture daughter.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Cole-Palmer Hotel', 'Calebton', 'Her include sit receive policy discussion. Will network physical play pull child push.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Underwood Group Hotel', 'Port Coryton', 'Act minute treatment quickly. Conference however find most city citizen.');
-INSERT INTO Hotels (Name_Hotel, Location_Hotel, Description_Hotel) VALUES ('Robinson-Fitzpatrick Hotel', 'Amyborough', 'Interest amount understand hard. Final ability person choose order. Like ball cause way.');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (1, '726', 'Double', 257.02, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (2, '847', 'Double', 225.91, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (3, '681', 'Single', 109.65, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (4, '193', 'Single', 298.31, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (4, '211', 'Double', 187.82, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (5, '934', 'Suite', 100.8, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (5, '555', 'Single', 199.07, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (6, '689', 'Single', 122.58, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (6, '941', 'Single', 58.24, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (7, '170', 'Single', 219.68, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (7, '997', 'Single', 280.85, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (8, '957', 'Suite', 181.14, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (8, '969', 'Single', 273.76, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (9, '561', 'Double', 215.06, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (9, '184', 'Double', 203.2, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (10, '965', 'Single', 110.76, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (10, '219', 'Suite', 105.12, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (11, '536', 'Single', 75.15, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (11, '975', 'Suite', 104.69, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (12, '227', 'Suite', 97.13, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (13, '193', 'Double', 258.46, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (13, '137', 'Suite', 55.41, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (14, '590', 'Single', 231.79, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (15, '657', 'Double', 205.15, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (16, '326', 'Single', 211.73, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (17, '284', 'Single', 175.91, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (17, '710', 'Single', 224.83, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (18, '366', 'Double', 276.1, 'Occupied');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (19, '814', 'Suite', 100.85, 'Available');
-INSERT INTO Rooms (Hotel_ID, Room_no, Room_type, Price_per_night, Status_Room) VALUES (20, '965', 'Single', 135.58, 'Occupied');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (4, 39, '2025-01-13', '2025-01-21', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (6, 1, '2024-05-10', '2024-05-18', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (14, 37, '2023-07-01', '2023-07-10', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (12, 25, '2024-05-07', '2024-05-12', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (18, 1, '2023-05-28', '2023-06-05', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (3, 22, '2025-02-03', '2025-02-04', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (9, 9, '2023-10-31', '2023-11-04', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (12, 40, '2024-10-17', '2024-10-22', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (12, 38, '2025-04-29', '2025-05-09', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (10, 25, '2025-02-16', '2025-02-23', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (3, 1, '2024-05-23', '2024-06-02', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (11, 11, '2023-12-25', '2023-12-29', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (15, 25, '2024-09-24', '2024-10-04', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (2, 26, '2024-06-05', '2024-06-15', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (2, 11, '2025-02-25', '2025-03-05', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (9, 11, '2023-10-27', '2023-11-04', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (16, 36, '2024-09-20', '2024-09-30', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (2, 32, '2023-08-22', '2023-08-28', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (15, 4, '2024-02-23', '2024-03-01', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (18, 6, '2024-11-21', '2024-11-24', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (13, 27, '2024-01-24', '2024-01-30', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (7, 1, '2023-11-26', '2023-11-27', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (17, 40, '2024-01-15', '2024-01-17', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (4, 39, '2024-01-31', '2024-02-04', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (9, 12, '2023-05-08', '2023-05-10', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (13, 6, '2023-08-15', '2023-08-16', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (15, 8, '2024-10-25', '2024-10-30', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (17, 23, '2024-09-20', '2024-09-22', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (9, 2, '2024-08-21', '2024-08-22', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (7, 17, '2023-08-11', '2023-08-20', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (12, 37, '2023-07-26', '2023-07-27', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (20, 32, '2024-04-24', '2024-05-02', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (14, 24, '2024-04-20', '2024-04-29', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (7, 25, '2023-08-02', '2023-08-12', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (1, 9, '2025-04-08', '2025-04-11', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (11, 22, '2024-12-20', '2024-12-26', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (3, 22, '2025-01-29', '2025-02-08', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (2, 18, '2023-09-05', '2023-09-08', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (19, 19, '2024-08-24', '2024-08-30', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (18, 9, '2024-12-17', '2024-12-22', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (16, 16, '2023-12-25', '2023-12-26', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (6, 34, '2025-04-22', '2025-04-24', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (13, 22, '2023-07-11', '2023-07-16', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (4, 7, '2024-12-02', '2024-12-11', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (16, 22, '2023-08-16', '2023-08-22', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (16, 8, '2023-11-02', '2023-11-10', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (2, 20, '2023-09-18', '2023-09-24', 'Cancelled');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (5, 11, '2023-07-26', '2023-08-05', 'Pending');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (3, 5, '2024-09-04', '2024-09-06', 'Confirmed');
-INSERT INTO Bookings (User_ID, Room_ID, Check_in_date, Check_out_date, Status_Booking) VALUES (8, 4, '2023-10-27', '2023-11-03', 'Confirmed');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (4, 26, 5, 'Show whatever simple wrong newspaper allow forward hour whom inside establish son turn.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (17, 19, 4, 'Season environment bag friend indicate similar entire.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (16, 38, 2, 'Effect unit state plant color current note order impact.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (14, 6, 3, 'Election air parent forget three doctor nature.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (8, 17, 5, 'Trip all myself tax country then probably or which white.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (6, 28, 2, 'Half sign admit hair look too reveal safe PM too right place.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (12, 8, 1, 'Share address than could security including hot child investment yourself still say poor.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (1, 34, 4, 'Education red citizen notice feeling write continue you economy huge.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (7, 8, 4, 'Total inside Mrs interesting less economy fire education expect part age visit message maybe instead.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (13, 17, 2, 'Reveal whole increase beat sometimes Republican agent manage special way glass line knowledge.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (2, 14, 5, 'Official south senior parent decision involve despite close paper pick work market suffer team.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (5, 7, 2, 'Major western education game modern song difference and two.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (15, 25, 3, 'Hour movement time benefit thus mean certainly value create agree likely.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (18, 10, 1, 'Model cause letter career election few turn think tree amount billion beyond quality fill final.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (20, 32, 2, 'Half side price little identify degree individual environment main protect thought certainly special seven physical court.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (19, 26, 4, 'Speak let guy son last early leave camera.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (17, 32, 3, 'Sound market best only know fish beautiful firm evening green require bring.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (16, 32, 2, 'Focus foreign four seven ability probably few cost summer city when bag.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (18, 40, 2, 'Time to black her become less production religious around both place strong parent behind bank.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (1, 22, 3, 'Between table tonight suddenly idea common laugh environment front company speak end time trouble stay beat.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (11, 3, 5, 'Stage short put lay too strong forward interesting small few speak cause compare difficult discuss.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (5, 17, 5, 'Trouble key between seem building care door natural produce.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (5, 25, 5, 'Operation point loss mean production establish fast performance perform conference cultural nature.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (10, 31, 1, 'Find community any morning more partner national probably.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (3, 34, 1, 'Fish somebody dinner former manager mind scene ago scene south ability no affect.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (3, 15, 2, 'Share body fly find create artist answer discover concern.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (2, 20, 1, 'Western worry week people worker time decide rest others development account knowledge.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (15, 22, 2, 'Increase simple as player use through first.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (5, 30, 3, 'Third since laugh model make speak might fight social forward provide.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (17, 25, 5, 'Yeah sense up add subject research sell idea school still up radio try.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (17, 3, 5, 'Local week color wait cover thank establish subject clearly.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (3, 34, 5, 'Product building view its contain such approach although say.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (3, 28, 2, 'Smile reveal third option chair decide grow between.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (10, 35, 5, 'Major friend through data difference others know expert cell style believe tough.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (14, 31, 4, 'Concern reach every put college would from beyond bed.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (20, 38, 2, 'Artist gas this sort unit operation foreign.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (1, 1, 2, 'Part father himself research general college bed everybody leader social per civil center newspaper.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (10, 33, 5, 'Front season suddenly really social standard even exist identify agency toward specific car stand form.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (9, 22, 1, 'Choose song according foot choice space federal condition officer speech back ten mention laugh spring move.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (16, 17, 3, 'Traditional start fund reality no work collection bar drug.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (14, 25, 4, 'Long toward wife pressure course soldier heavy enough operation kitchen.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (2, 11, 2, 'See we find knowledge treatment development serious seat address star role yard son speech Democrat.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (8, 19, 3, 'Give song computer respond current wife budget save child speech represent performance cold if project.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (2, 3, 4, 'Statement unit in baby notice movie democratic score.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (14, 10, 4, 'Respond some significant specific city paper part them just employee Mr management admit any could.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (20, 6, 2, 'Senior current fact scientist nothing change suffer space a would free finally national difficult.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (12, 27, 1, 'Activity include audience white step generation beyond nor goal rich study.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (20, 30, 4, 'Training hundred it start now family above ready lawyer attack simply protect something camera himself compare.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (15, 4, 1, 'Prepare blue tend house staff commercial herself prove picture million.');
-INSERT INTO Reviews (User_ID, Room_ID, Rating, Comment) VALUES (16, 10, 1, 'Speech other question indeed message picture study customer leader contain culture along budget serious form.');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (2, 'Focus', 'White Ltd', 'Every war something book notice society truth class here develop seven.', 'New Crystal');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (20, 'Use', 'Barker, Cox and Williams', 'Modern democratic human difference rock music check close agreement box people point month.', 'New Robert');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (20, 'Add', 'Taylor-Robertson', 'Project establish indicate very art eat entire front bit style man.', 'Brianview');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (5, 'Same', 'Howard and Sons', 'Discussion without current rate business worker professor wife get hospital.', 'New Ryanville');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (11, 'Environmental', 'Harris, Turner and Miller', 'Matter instead need conference something expert suggest.', 'Gordonport');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (4, 'End', 'Carpenter, Allen and Woods', 'Group environmental foreign threat billion worry less physical.', 'North Sarah');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (18, 'Magazine', 'Tate-Flores', 'Find cell animal ready at order attention both hour factor blue walk water.', 'Tinatown');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (12, 'Others', 'Powell Ltd', 'Model dinner simply clear prepare wear movement certainly group member it.', 'New Carol');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (7, 'Culture', 'White-Barrett', 'Friend bill fire through bill seat.', 'Lake Franceshaven');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (13, 'Possible', 'Nielsen, Snyder and Rogers', 'Bed among understand else represent detail open future rich seat total sound late.', 'North Emily');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (16, 'Leg', 'Campbell, Farmer and King', 'Gas fly drug good gun grow.', 'Harrisfurt');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (4, 'Production', 'Ryan, Morales and Morrison', 'Take budget agency century strong anything trial factor culture pretty drug north.', 'Lake Ryan');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (2, 'Quickly', 'Horton, Mitchell and Brown', 'Plan high civil tree action tend coach yard treat.', 'West Katrinabury');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (20, 'Treatment', 'Crawford LLC', 'So say movie world show market understand media successful anyone candidate defense discussion.', 'North Bob');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (15, 'Opportunity', 'Lawrence Ltd', 'Its practice how save several model think five miss camera federal family I.', 'South Ashleybury');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (20, 'Wish', 'Baker-Bates', 'Start of wind white message laugh billion.', 'Marcusland');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (11, 'Sense', 'Cline-Paul', 'Subject yet forget open newspaper number property.', 'North Kylemouth');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (4, 'Break', 'Wade, Smith and Yang', 'Tax method six enough war husband land live former.', 'Danielland');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (20, 'Class', 'Bryant-Cervantes', 'Person rate security develop consumer why letter little bar.', 'New Brett');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (10, 'Enter', 'Burch-Cook', 'Himself game will third and mean.', 'Sandymouth');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (5, 'Bad', 'Calderon-Stokes', 'Community together far enough ability citizen girl do them answer knowledge her ten.', 'West Anthonytown');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (13, 'Machine', 'Lewis-Thompson', 'Receive scene no enough case action institution.', 'Lauriemouth');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (10, 'Meet', 'Morgan, Cook and Williams', 'Draw model adult stand five modern there resource box during star much.', 'Edwardbury');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (4, 'Owner', 'Fernandez-Hamilton', 'Energy although well far summer game ever hospital arrive third quite.', 'East Wendymouth');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (17, 'Want', 'Martin, Williams and Ferguson', 'Watch choice cause natural imagine affect explain single.', 'East Briannatown');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (7, 'Hold', 'Peterson-Downs', 'Half important guess what edge change structure control career state.', 'West Bonnieside');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (2, 'Process', 'Davis, Martin and Scott', 'Land house growth fish else social from side hear.', 'Josephstad');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (13, 'Tell', 'Gutierrez and Sons', 'Citizen least organization probably only each ability carry.', 'Ortizshire');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (15, 'Table', 'Randall Group', 'Person current able report director pass machine want outside.', 'Nobleton');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (12, 'Force', 'Jackson LLC', 'Mean last offer hope responsibility eight west.', 'Kramermouth');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (7, 'Media', 'Romero-Robinson', 'Street make case debate administration expert it run travel determine someone hit team.', 'Port David');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (15, 'In', 'Summers, Booth and Friedman', 'Guess them purpose partner son air out price interest finally central whatever.', 'Randybury');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (12, 'Stuff', 'Morton-Arroyo', 'Market walk also traditional score dark factor tell.', 'West Josephberg');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (3, 'Somebody', 'Parker and Sons', 'Decide officer sometimes art call various offer exist article of.', 'Danielview');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (2, 'Good', 'Larson, Warren and Green', 'Whether visit speak ahead rock parent some.', 'North Ronald');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (2, 'Region', 'Watkins LLC', 'Gas right yes American call statement specific head friend or try such.', 'Ryanville');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (16, 'Book', 'Spencer, Clark and Day', 'Certain theory bar allow great they now population in full billion.', 'West Joe');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (9, 'Really', 'Beltran, Lewis and Charles', 'Current data whether exactly resource Democrat meeting speech pattern surface play.', 'Wendyhaven');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (1, 'East', 'Riley-Knight', 'Town board it big also foreign boy executive year drive small smile assume.', 'Castillomouth');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (17, 'Down', 'Young Inc', 'Approach live necessary interesting easy perhaps best company far last dark power energy.', 'Leemouth');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (19, 'Relationship', 'Morrison PLC', 'Go energy cold right must body doctor tough radio not account.', 'Boothborough');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (19, 'Indicate', 'Roberts LLC', 'Growth alone until sell occur person.', 'Lake Brandonchester');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (7, 'Price', 'Chavez-Schneider', 'High inside somebody analysis fund artist president purpose professional per second add picture.', 'Port Ashleyside');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (8, 'Already', 'Vargas Group', 'Beyond Congress television never discuss truth trial hundred anything.', 'Rosalesbury');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (3, 'Case', 'Vazquez-Hopkins', 'East them your choice their make.', 'Charlotteborough');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (17, 'Often', 'Tran Ltd', 'Choice manage of catch theory hit look lay score inside.', 'Port Caleb');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (17, 'Traditional', 'Mason, Morgan and Petersen', 'Dream memory evening small focus floor subject debate believe.', 'Jamesbury');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (14, 'Issue', 'Martin, Lewis and Leon', 'Ever voice hotel at week key benefit coach building.', 'Josephfurt');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (17, 'Increase', 'Johnson and Sons', 'Indeed four interview return American under.', 'North Austinside');
-INSERT INTO Recommendations (User_ID, Place, Name_Place, Description_Place, Location_Place) VALUES (10, 'Economic', 'Lam Ltd', 'Interesting measure value two east avoid chair cover care time.', 'South Joshuahaven');
+-- RECOMMENDATIONS
+CREATE TABLE recommendations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    hotel_id INTEGER NOT NULL,
+    description TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
+);
+
+
+INSERT INTO users (username, password, email, role)
+VALUES ('db_admin_user', 'securepass123', 'admin@example.com', 'db_admin');
+INSERT INTO users (username, password, email, role)
+VALUES ('hotel_manager', 'hotelpass456', 'manager@hotel.com', 'admin');
+INSERT INTO users (username, password, email, role)
+VALUES ('john_doe', 'passjohn789', 'john.doe@example.com', 'user');
+INSERT INTO users (username, password, email, role)
+VALUES ('jane_smith', 'jane987pass', 'jane.smith@example.com', 'user');
+
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('HOTEL LUX GARDEN', 'Azuga, Romania', 'Lux Garden Hotel & Resort invites you to enjoy moments of relaxation in a luxurious setting, surrounded by refinement and elegance, where good taste and harmony are at home. Fresh air, fairy-tale landscapes, and top-level comfort! Perfectly located at the base of the ski slopes and just a few steps away from the gondola’s lower station in Azuga, Lux Garden is the only five-star hotel that offers you an oasis of tranquility, comfort, and dedicated services.', 'azuga1.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Azuga Ski And Bike Resort', 'Azuga, Romania', 'Azuga Ski and Bike Resort is a 4-star hotel located in the heart of the Carpathian Mountains, offering a perfect blend of comfort and adventure. With direct access to ski slopes and mountain biking trails, it’s an ideal destination for outdoor enthusiasts.', 'azuga2.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Casa Azugeana', 'Azuga, Romania', 'Casa Azugeana is a charming guesthouse located in the picturesque town of Azuga. It offers cozy accommodations and a warm atmosphere, making it a perfect retreat for families and couples.', 'azuga3.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Vila La Gabi', 'Azuga, Romania', 'Vila La Gabi is a beautiful villa situated in the scenic Azuga area. It features modern amenities and a lovely garden, providing a peaceful escape for guests.', 'azuga4.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Hotel Margaritar', 'Busteni, Romania', 'Hotel Margaritar is a cozy hotel located in Busteni, offering comfortable rooms and stunning views of the surrounding mountains. It’s a great base for exploring the area.', 'busteni1.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Vila Leonida', 'Busteni, Romania', 'Vila Leonida is a charming villa in Busteni, providing a homely atmosphere and easy access to local attractions. It’s perfect for families and groups.', 'busteni2.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Casa Freya', 'Busteni, Romania', 'Casa Freya is a delightful guesthouse in Busteni, offering comfortable accommodations and a friendly environment. It’s an ideal spot for relaxation and exploration.', 'busteni3.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Hotel Valedor Boutique and Spa', 'Busteni, Romania', 'Hotel Valedor Boutique and Spa is a luxurious hotel in Busteni, featuring elegant rooms and a full-service spa. It’s perfect for those seeking relaxation and pampering.', 'busteni4.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Hotel New Belvedere', 'Poiana Brasov, Romania', 'Hotel New Belvedere is a modern hotel located in Poiana Brasov, offering stylish accommodations and easy access to ski slopes. It’s a great choice for winter sports enthusiasts.', 'poianabrasov1.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Hotel Alpin', 'Poiana Brasov, Romania', 'Hotel Alpin is a luxurious hotel in Poiana Brasov, featuring elegant rooms and top-notch amenities. It’s perfect for a relaxing getaway in the mountains.', 'poianabrasov2.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Ana Hotels Sport Poiana Brasov', 'Poiana Brasov, Romania', 'Ana Hotels Sport Poiana Brasov is a modern hotel offering comfortable accommodations and a range of recreational facilities. It’s ideal for both relaxation and adventure.', 'poianabrasov3.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Hotel Acasa la Dracula', 'Poiana Brasov, Romania', 'Hotel Acasa la Dracula is a unique hotel in Poiana Brasov, themed around the legend of Dracula. It offers a one-of-a-kind experience for guests.', 'poianabrasov4.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('andBeyond Mnemba Island', 'Mnemba Island, Tanzania', 'andBeyond Mnemba Island is a luxurious private island resort in Tanzania. It offers pristine beaches, world-class diving, and exclusive accommodations for an unforgettable tropical getaway.', 'random2.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Six Senses Zighy Bay', 'Musandam, Oman', 'Six Senses Zighy Bay is a stunning resort located in Musandam, Oman. It features luxurious villas with private pools, breathtaking mountain views, and a private beach for a perfect escape.', 'random3.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES('Jumeirah Burj Al Arab', 'Dubai, UAE', 'Jumeirah Burj Al Arab is an iconic luxury hotel in Dubai, known for its distinctive sail-shaped silhouette. It offers opulent accommodations, world-class dining, and unparalleled service, making it a symbol of luxury and extravagance.', 'random4.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Waldorf Astoria Maldives Ithaafushi', 'Maldives', 'Waldorf Astoria Maldives Ithaafushi is a luxurious resort in the Maldives, offering private villas, stunning ocean views, and exceptional dining experiences. It’s the perfect destination for a romantic getaway or a family vacation.', 'random5.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Hotel International', 'Sinaia, Romania', 'Hotel International is a luxurious hotel located in Sinaia, Romania. It offers elegant accommodations, a full-service spa, and stunning views of the Carpathian Mountains.', 'sinaia1.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Hotel Cumpatu', 'Sinaia, Romania', 'Hotel Cumpatu is a charming hotel in Sinaia, providing comfortable rooms and a cozy atmosphere. It’s an ideal base for exploring the beautiful surroundings.', 'sinaia2.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Hotel Tantzia', 'Sinaia, Romania', 'Hotel Tantzia is a delightful hotel in Sinaia, offering modern amenities and a warm ambiance. It’s perfect for families and couples looking for a relaxing getaway.', 'sinaia3.jpg');
+
+INSERT INTO hotels (name, location, description, image)
+VALUES ('Vila Camelia', 'Sinaia, Romania', 'Vila Camelia is a beautiful villa in Sinaia, featuring comfortable accommodations and a lovely garden. It’s a great choice for those seeking tranquility and nature.', 'sinaia4.jpg');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (1, '101', 'Deluxe Room', 150.00, 'available', './rooms_images/azuga1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (1, '102', 'Superior Room', 200.00, 'available', './rooms_images/azuga1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (1, '103', 'Family Room', 250.00, 'available', './rooms_images/azuga1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (1, '104', 'Suite', 300.00, 'available', './rooms_images/azuga1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (2, '201', 'Standard Room', 120.00, 'available', './rooms_images/azuga2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (2, '202', 'Deluxe Room', 180.00, 'available', './rooms_images/azuga2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (2, '203', 'Superior Room', 220.00, 'available', './rooms_images/azuga2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (2, '204', 'Family Room', 270.00, 'available', './rooms_images/azuga2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (3, '301', 'Standard Room', 110.00, 'available', './rooms_images/azuga3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (3, '302', 'Deluxe Room', 160.00, 'available', './rooms_images/azuga3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (3, '303', 'Superior Room', 210.00, 'available', './rooms_images/azuga3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (3, '304', 'Family Room', 260.00, 'available', './rooms_images/azuga3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (4, '401', 'Standard Room', 130.00, 'available', './rooms_images/azuga4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (4, '402', 'Deluxe Room', 190.00, 'available', './rooms_images/azuga4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (4, '403', 'Superior Room', 240.00, 'available', './rooms_images/azuga4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (4, '404', 'Family Room', 290.00, 'available', './rooms_images/azuga4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (5, '501', 'Standard Room', 140.00, 'available', './rooms_images/busteni1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (5, '502', 'Deluxe Room', 200.00, 'available', './rooms_images/busteni1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (5, '503', 'Superior Room', 250.00, 'available', './rooms_images/busteni1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (5, '504', 'Family Room', 300.00, 'available', './rooms_images/busteni1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (6, '601', 'Standard Room', 150.00, 'available', './rooms_images/busteni2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (6, '602', 'Deluxe Room', 210.00, 'available', './rooms_images/busteni2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (6, '603', 'Superior Room', 260.00, 'available', './rooms_images/busteni2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (6, '604', 'Family Room', 310.00, 'available', './rooms_images/busteni2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (7, '701', 'Standard Room', 160.00, 'available', './rooms_images/busteni3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (7, '702', 'Deluxe Room', 220.00, 'available', './rooms_images/busteni3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (7, '703', 'Superior Room', 270.00, 'available', './rooms_images/busteni3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (7, '704', 'Family Room', 320.00, 'available', './rooms_images/busteni3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (8, '801', 'Standard Room', 170.00, 'available', './rooms_images/busteni4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (8, '802', 'Deluxe Room', 230.00, 'available', './rooms_images/busteni4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (8, '803', 'Superior Room', 280.00, 'available', './rooms_images/busteni4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (8, '804', 'Family Room', 330.00, 'available', './rooms_images/busteni4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (9, '901', 'Standard Room', 180.00, 'available', './rooms_images/poianabrasov1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (9, '902', 'Deluxe Room', 240.00, 'available', './rooms_images/poianabrasov1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (9, '903', 'Superior Room', 290.00, 'available', './rooms_images/poianabrasov1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (9, '904', 'Family Room', 340.00, 'available', './rooms_images/poianabrasov1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (10, '1001', 'Standard Room', 190.00, 'available', './rooms_images/poianabrasov2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (10, '1002', 'Deluxe Room', 250.00, 'available', './rooms_images/poianabrasov2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (10, '1003', 'Superior Room', 300.00, 'available', './rooms_images/poianabrasov2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (10, '1004', 'Family Room', 350.00, 'available', './rooms_images/poianabrasov2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (11, '1101', 'Standard Room', 200.00, 'available', './rooms_images/poianabrasov3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (11, '1102', 'Deluxe Room', 260.00, 'available', './rooms_images/poianabrasov3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (11, '1103', 'Superior Room', 310.00, 'available', './rooms_images/poianabrasov3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (11, '1104', 'Family Room', 360.00, 'available', './rooms_images/poianabrasov3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (12, '1201', 'Standard Room', 210.00, 'available', './rooms_images/poianabrasov4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (12, '1202', 'Deluxe Room', 270.00, 'available', './rooms_images/poianabrasov4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (12, '1203', 'Superior Room', 320.00, 'available', './rooms_images/poianabrasov4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (12, '1204', 'Family Room', 370.00, 'available', './rooms_images/poianabrasov4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (13, '1301', 'Standard Room', 220.00, 'available', './rooms_images/random2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (13, '1302', 'Deluxe Room', 280.00, 'available', './rooms_images/random2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (13, '1303', 'Superior Room', 330.00, 'available', './rooms_images/random2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (13, '1304', 'Family Room', 380.00, 'available', './rooms_images/random2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (14, '1401', 'Standard Room', 230.00, 'available', './rooms_images/random3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (14, '1402', 'Deluxe Room', 290.00, 'available', './rooms_images/random3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (14, '1403', 'Superior Room', 340.00, 'available', './rooms_images/random3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (14, '1404', 'Family Room', 390.00, 'available', './rooms_images/random3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (15, '1501', 'Standard Room', 240.00, 'available', './rooms_images/random4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (15, '1502', 'Deluxe Room', 300.00, 'available', './rooms_images/random4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (15, '1503', 'Superior Room', 350.00, 'available', './rooms_images/random4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (15, '1504', 'Family Room', 400.00, 'available', './rooms_images/random4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (16, '1601', 'Standard Room', 250.00, 'available', './rooms_images/random5_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (16, '1602', 'Deluxe Room', 310.00, 'available', './rooms_images/random5_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');  
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (16, '1603', 'Superior Room', 360.00, 'available', './rooms_images/random5_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (16, '1604', 'Family Room', 410.00, 'available', './rooms_images/random5_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (17, '1701', 'Standard Room', 260.00, 'available', './rooms_images/sinaia1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (17, '1702', 'Deluxe Room', 320.00, 'available', './rooms_images/sinaia1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (17, '1703', 'Superior Room', 370.00, 'available', './rooms_images/sinaia1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (17, '1704', 'Family Room', 420.00, 'available', './rooms_images/sinaia1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (18, '1801', 'Standard Room', 270.00, 'available', './rooms_images/sinaia2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (18, '1802', 'Deluxe Room', 330.00, 'available', './rooms_images/sinaia2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (18, '1803', 'Superior Room', 380.00, 'available', './rooms_images/sinaia2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (18, '1804', 'Family Room', 430.00, 'available', './rooms_images/sinaia2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (19, '1901', 'Standard Room', 280.00, 'available', './rooms_images/sinaia3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (19, '1902', 'Deluxe Room', 340.00, 'available', './rooms_images/sinaia3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (19, '1903', 'Superior Room', 390.00, 'available', './rooms_images/sinaia3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (19, '1904', 'Family Room', 440.00, 'available', './rooms_images/sinaia3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (20, '2001', 'Standard Room', 290.00, 'available', './rooms_images/sinaia4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (20, '2002', 'Deluxe Room', 350.00, 'available', './rooms_images/sinaia4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (20, '2003', 'Superior Room', 400.00, 'available', './rooms_images/sinaia4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
+VALUES (20, '2004', 'Family Room', 450.00, 'available', './rooms_images/sinaia4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+
+INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
+VALUES (1, 1, 2, '2025-06-15', '2025-06-18', 'confirmed');
+
+INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
+VALUES (2, 3, 1, '2025-07-01', '2025-07-05', 'pending');
+
+INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
+VALUES (3, 2, 4, '2025-08-10', '2025-08-15', 'cancelled');
+
+INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
+VALUES (1, 5, 2, '2025-09-01', '2025-09-03', 'confirmed');
+
+INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
+VALUES (2, 4, 3, '2025-07-20', '2025-07-25', 'confirmed');
+

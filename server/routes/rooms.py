@@ -22,12 +22,17 @@ def get_all_rooms():
     rooms = Room.query.all()
     if not rooms:
         return jsonify({"message": "No rooms found"}), 404
+
     rooms_list = [{
         "id": room.id,
         "hotel_id": room.hotel_id,
-        "room_number": room.room_number,
+        "room_number": room.room_no,
         "room_type": room.room_type,
-        "price": room.price,
-        "status": room.availability
+        "price_per_night": room.price_per_night,
+        "status": room.status,
+        "image": room.image,
+        "facilities": room.facilities
     } for room in rooms]
+
     return jsonify(rooms_list), 200
+

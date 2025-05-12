@@ -1,17 +1,19 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;  /* redus de la 2.1rem */
+  font-weight: bold;
+  color: #ff385c;
+  gap: 10px;  /* redus de la 14px */
+  letter-spacing: 1px;
 }
-
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -64,10 +66,11 @@ body {
 
 /* Header */
 .header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 28px 60px 18px 60px;
+  padding: 15px 60px;  /* redus de la 28px 60px 18px 60px */
   background: #fff;
   box-shadow: 0 2px 12px #e0e0e0;
   border-radius: 0 0 32px 32px;
@@ -193,16 +196,16 @@ body {
 }
 
 /* Popular Listings */
+/* Popular Listings */
 .popular-listings {
-  padding: 44px 0 32px 0;
+  width: 100%;
+  padding: 44px 5% 32px 5%;
   background: #fff;
   text-align: center;
   box-shadow: 0 2px 12px #e0e0e0;
   border-radius: 32px;
   margin-bottom: 36px;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 175px;  /* adăugat pentru a crea spațiu suplimentar */
 }
 
 .popular-listings h2 {
@@ -211,7 +214,6 @@ body {
   color: #222;
   margin-bottom: 18px;
 }
-
 .listings {
   display: flex;
   justify-content: center;
@@ -314,17 +316,15 @@ body {
 
 /* Footer */
 .footer {
+  width: 100%;
   background: #222;
   color: #fff;
   text-align: center;
   padding: 26px 0;
-  margin-top: 44px;
+  margin-top: 80px;  /* mărit de la 44px */
   font-size: 1.05rem;
   letter-spacing: 1px;
   border-radius: 32px 32px 0 0;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* Authentication Styles */

@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+import axios from "./api/axios"; // sau "./axios" dacă nu e într-un folder separat
 import { BrowserRouter as Router, Routes, Route, useNavigate, Link } from "react-router-dom";
 import reactLogo from './assets/react.svg'
 import mountainImg from '../../photos/mountainsideretreat(74).jpg'
@@ -9,9 +11,24 @@ import CentralApartments from "./CentralApartments";
 import Login from "./Login";
 import Register from "./Register";
 import './App.css'
+import Search from "./Search";
+
 
 function Home() {
   const navigate = useNavigate();
+  const [hotels, setHotels] = useState([]);
+
+  useEffect(() => {
+    axios.get("/hotels")
+      .then((res) => {
+        setHotels(res.data);
+      })
+      .catch((err) => {
+        console.error("Eroare la încărcarea hotelurilor:", err);
+      });
+  }, []);
+
+
   return (
     <div className="home-container">
       {/* Header */}
@@ -40,64 +57,34 @@ function Home() {
           <input type="date" />
           <input type="date" />
           <input type="number" min="1" placeholder="Guests" />
-          <button className="primary">Search</button>
+          <button className="primary" onClick={() => navigate("/search")}>Search</button>
         </div>
       </section>
 
-      {/* Popular Listings */}
+     
+
       <section className="popular-listings">
-        <h2>Popular stays</h2>
-        <div className="listings">
-          <div
-            className="listing-card"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("/mountain-cabins")}
-          >
-            <img src={mountainImg} alt="Mountain Cabin" />
-            <div className="listing-info">
-              <h3>Mountain Cabin</h3>
-              <p>From 200 RON/night</p>
+      <h2>Available Hotels</h2>
+      <div className="listings">
+        {hotels.length === 0 ? (
+          <p>Loading hotels...</p>
+        ) : (
+          hotels.map((hotel) => (
+            <div className="listing-card" key={hotel.id}>
+              <img src={`http://localhost:5000${hotel.image}`} alt={hotel.name} />
+              <div className="listing-info">
+                <h3>{hotel.name}</h3>
+                <p style={{ color: "#ff385c", fontWeight: 600 }}>{hotel.location}</p>
+                <p style={{ color: "#444", fontSize: "0.95rem", marginTop: 8 }}>{hotel.description}</p>
+              </div>
             </div>
-          </div>
-          <div
-            className="listing-card"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("/central-apartments")}
-          >
-            <img src={apartmentImg} alt="Central Apartment" />
-            <div className="listing-info">
-              <h3>Central Apartment</h3>
-              <p>From 300 RON/night</p>
-            </div>
-          </div>
-          <div
-            className="listing-card"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate("/beach-villas")}
-          >
-            <img src={villaImg} alt="Beach Villa" />
-            <div className="listing-info">
-              <h3>Beach Villa</h3>
-              <p>From 500 RON/night</p>
-            </div>
-          </div>
-        </div>
-      </section>
+          ))
+        )}
+      </div>
+    </section>
+ 
 
-      {/* Benefits */}
-      <section className="benefits">
-        <h2>Why choose InnStay?</h2>
-        <ul>
-          <li>Fast & secure booking</li>
-          <li>Options for every budget</li>
-          <li>24/7 customer support</li>
-        </ul>
-      </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <p>&copy; 2024 InnStay. All rights reserved.</p>
-      </footer>
+      
     </div>
   );
 }
@@ -107,6 +94,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Search />} /> 
         <Route path="/beach-villas" element={<BeachVillas />} />
         <Route path="/mountain-cabins" element={<MountainCabins />} />
         <Route path="/central-apartments" element={<CentralApartments />} />

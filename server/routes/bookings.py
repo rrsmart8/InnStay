@@ -22,12 +22,16 @@ def get_all_bookings():
     bookings = Booking.query.all()
     if not bookings:
         return jsonify({"message": "No bookings found"}), 404
+
     bookings_list = [{
         "id": booking.id,
         "user_id": booking.user_id,
         "room_id": booking.room_id,
-        "check_in_date": booking.check_in_date,
-        "check_out_date": booking.check_out_date,
-        "status": booking.status
+        "guests": booking.guests,
+        "check_in_date": booking.check_in_date.isoformat(),
+        "check_out_date": booking.check_out_date.isoformat(),
+        "status": booking.status,
+        "created_at": booking.created_at.isoformat() if booking.created_at else None
     } for booking in bookings]
+
     return jsonify(bookings_list), 200

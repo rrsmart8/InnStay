@@ -7,7 +7,7 @@ import os
 
 def init_database(app):
     """Initialize database and verify connection"""
-    db_path = os.path.join(os.path.dirname(app.root_path), 'database', 'innstayDB.sqlite')
+    db_path = os.path.join(os.path.dirname(app.root_path), 'database', 'innstayDB1.sqlite')
     
     if not os.path.exists(db_path):
         print(f"⚠️ Database file not found at: {db_path}")
@@ -24,7 +24,12 @@ def init_database(app):
         return False
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(
+        __name__,
+        static_folder="hotels_images",          # folderul local cu imaginile
+        static_url_path="/static/hotels"        # URL-ul public prin care se vor accesa
+    )
+
     app.config.from_object(Config)
     
     # Initialize extensions
