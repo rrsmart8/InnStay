@@ -12,20 +12,42 @@ function View() {
   const [checkOut, setCheckOut] = useState(
     new Date(Date.now() + 5 * 86400000).toISOString().split("T")[0]
   );
+  const [unavailableRoomIds, setUnavailableRoomIds] = useState([]);
 
+  // Load hotel details
   useEffect(() => {
-    axios.get(`/hotels/${id}/details`)
-      .then(res => {
+    axios
+      .get(`/hotels/${id}/details`)
+      .then((res) => {
         setHotel(res.data);
         if (res.data.rooms?.length) {
           setSelectedRoomId(res.data.rooms[0].id);
         }
       })
-      .catch(err => console.error("Error loading hotel details:", err))
+      .catch((err) => console.error("Error loading hotel details:", err))
       .finally(() => setLoading(false));
   }, [id]);
 
-  const selectedRoom = hotel?.rooms.find(r => r.id === selectedRoomId);
+  // Fetch unavailable rooms for current check-in/out
+  useEffect(() => {
+    if (!checkIn || !checkOut) return;
+
+    axios
+      .get(`/bookings/unavailable-rooms`, {
+        params: {
+          check_in: checkIn,
+          check_out: checkOut,
+        },
+      })
+      .then((res) => {
+        setUnavailableRoomIds(res.data.unavailable || []);
+      })
+      .catch((err) => {
+        console.error("Error fetching unavailable rooms:", err);
+      });
+  }, [checkIn, checkOut]);
+
+  const selectedRoom = hotel?.rooms.find((r) => r.id === selectedRoomId);
   const nights = Math.max(
     1,
     Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24))
@@ -34,6 +56,40 @@ function View() {
   const cleaning = Math.round(subtotal * 0.05);
   const service = Math.round(subtotal * 0.15);
   const total = subtotal + cleaning + service;
+
+  const handleReserve = async () => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) {
+      alert("You must be logged in to book a room.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "/bookings/",
+        {
+          room_id: selectedRoomId,
+          check_in_date: checkIn,
+          check_out_date: checkOut,
+          guests: 1,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("Booking successful!");
+      console.log("Booking response:", response.data);
+    } catch (error) {
+      if (error.response?.status === 409) {
+        alert("This room is already booked for the selected dates.");
+      } else {
+        console.error("Booking error:", error.response?.data || error.message);
+        alert("Failed to book the room. Please try again.");
+      }
+    }
+  };
 
   if (loading) return <div className="loading">Loading...</div>;
   if (!hotel) return <div className="error">Hotel not found.</div>;
@@ -45,7 +101,11 @@ function View() {
         <p className="location">{hotel.location}</p>
       </div>
 
-      <img className="main-image" src={`http://localhost:5000${hotel.image}`} alt={hotel.name} />
+      <img
+        className="main-image"
+        src={`http://localhost:5000${hotel.image}`}
+        alt={hotel.name}
+      />
 
       <p className="description">{hotel.description}</p>
 
@@ -54,24 +114,36 @@ function View() {
         <div className="left-column">
           <h3 className="section-title">Available rooms</h3>
           <div className="rooms-grid">
-            {hotel.rooms.map(room => (
-              <div
-                key={room.id}
-                className={`room-card ${room.id === selectedRoomId ? "selected" : ""}`}
-                onClick={() => setSelectedRoomId(room.id)}
-              >
-                <img
-                  className="room-image"
-                  src={`http://localhost:5000${room.image}`}
-                  alt={room.room_type}
-                />
-                <div className="room-info">
-                  <h4>{room.room_type}</h4>
-                  <p className="room-price">{room.price_per_night} RON <span>/night</span></p>
-                  <p className="room-facilities">{room.facilities}</p>
+            {hotel.rooms.map((room) => {
+              const isUnavailable = unavailableRoomIds.includes(room.id);
+              return (
+                <div
+                  key={room.id}
+                  className={`room-card ${
+                    room.id === selectedRoomId ? "selected" : ""
+                  } ${isUnavailable ? "disabled" : ""}`}
+                  onClick={() =>
+                    !isUnavailable && setSelectedRoomId(room.id)
+                  }
+                >
+                  <img
+                    className="room-image"
+                    src={`http://localhost:5000${room.image}`}
+                    alt={room.room_type}
+                  />
+                  <div className="room-info">
+                    <h4>{room.room_type}</h4>
+                    <p className="room-price">
+                      {room.price_per_night} RON <span>/night</span>
+                    </p>
+                    <p className="room-facilities">{room.facilities}</p>
+                    {isUnavailable && (
+                      <p className="room-unavailable">Unavailable</p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -83,18 +155,28 @@ function View() {
             <div className="date-pickers">
               <div className="date-field">
                 <label>Check-in</label>
-                <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} />
+                <input
+                  type="date"
+                  value={checkIn}
+                  onChange={(e) => setCheckIn(e.target.value)}
+                />
               </div>
 
               <div className="date-field">
                 <label>Check-out</label>
-                <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} />
+                <input
+                  type="date"
+                  value={checkOut}
+                  onChange={(e) => setCheckOut(e.target.value)}
+                />
               </div>
             </div>
 
             <div className="price-summary">
               <div className="price-row">
-                <span>{selectedRoom?.price_per_night} RON × {nights} nights</span>
+                <span>
+                  {selectedRoom?.price_per_night} RON × {nights} nights
+                </span>
                 <span>{subtotal} RON</span>
               </div>
               <div className="price-row">
@@ -111,7 +193,9 @@ function View() {
               </div>
             </div>
 
-            <button className="book-btn">Reserve</button>
+            <button className="book-btn" onClick={handleReserve}>
+              Reserve
+            </button>
           </div>
         </div>
       </div>

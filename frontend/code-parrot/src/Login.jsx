@@ -31,7 +31,7 @@ function Login() {
 
       
       const { access_token, user } = res.data;
-      localStorage.setItem("token", access_token);
+      localStorage.setItem("accessToken", access_token);
       localStorage.setItem("user", JSON.stringify(user));
       console.log("Login successful:", access_token); // ✅ nu `token`
       navigate("/");

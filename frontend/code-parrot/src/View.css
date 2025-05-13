@@ -91,6 +91,13 @@
   box-shadow: 0 8px 28px rgba(255, 56, 92, 0.15);
   border: 2px solid rgba(255, 56, 92, 0.2);
 }
+.room-card.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
+
 
 .room-card.selected {
   border: 2px solid #ff385c;
@@ -139,6 +146,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.room-unavailable {
+  margin-top: 8px;
+  color: #e11d48;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
 
 /* Facilities section */
 .facilities-section {

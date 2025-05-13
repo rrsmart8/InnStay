@@ -7,11 +7,11 @@ function Header() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
     navigate("/");
     window.location.reload(); // Refresh UI after logout
