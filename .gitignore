@@ -1,0 +1,12 @@
+# Server
+server/__pycache__/
+server/routes/__pycache__/
+
+# Environment
+.env
+venv/
+
+# Folders
+
+server/hotels_images/
+server/rooms_images/
