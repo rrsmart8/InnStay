@@ -1,0 +1,510 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		74DE2AAE2DC56ED000748A08 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DE2AA82DC56ED000748A08 /* Preview Assets.xcassets */; };
+		74DE2AAF2DC56ED000748A08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DE2AAA2DC56ED000748A08 /* Assets.xcassets */; };
+		74DE2AB02DC56ED000748A08 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AAB2DC56ED000748A08 /* ContentView.swift */; };
+		74DE2AB12DC56ED000748A08 /* InnStayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AAC2DC56ED000748A08 /* InnStayApp.swift */; };
+		74DE2AC42DC5712E00748A08 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AC32DC5712E00748A08 /* ExploreView.swift */; };
+		74DE2AC62DC5768A00748A08 /* ListingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AC52DC5768A00748A08 /* ListingItemView.swift */; };
+		74DE2ACA2DC63DBE00748A08 /* SearchAndFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AC92DC63DBE00748A08 /* SearchAndFilterBar.swift */; };
+		74DE2ACC2DC64DEF00748A08 /* ListingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2ACB2DC64DEF00748A08 /* ListingDetailView.swift */; };
+		74DE2ACF2DC6521200748A08 /* ListingImageCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2ACE2DC6521200748A08 /* ListingImageCarouselView.swift */; };
+		74DE2AD62DC6819400748A08 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AD52DC6819400748A08 /* LoginScreen.swift */; };
+		74DE2AD92DC6830E00748A08 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AD82DC6830E00748A08 /* SignUpScreen.swift */; };
+		74DE2ADC2DC683B700748A08 /* AuthRouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2ADB2DC683B700748A08 /* AuthRouterView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		74DE2A972DC56E4500748A08 /* InnStayMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InnStayMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		74DE2AA82DC56ED000748A08 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		74DE2AAA2DC56ED000748A08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		74DE2AAB2DC56ED000748A08 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		74DE2AAC2DC56ED000748A08 /* InnStayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnStayApp.swift; sourceTree = "<group>"; };
+		74DE2AC32DC5712E00748A08 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		74DE2AC52DC5768A00748A08 /* ListingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingItemView.swift; sourceTree = "<group>"; };
+		74DE2AC92DC63DBE00748A08 /* SearchAndFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAndFilterBar.swift; sourceTree = "<group>"; };
+		74DE2ACB2DC64DEF00748A08 /* ListingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingDetailView.swift; sourceTree = "<group>"; };
+		74DE2ACE2DC6521200748A08 /* ListingImageCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListingImageCarouselView.swift; sourceTree = "<group>"; };
+		74DE2AD52DC6819400748A08 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		74DE2AD82DC6830E00748A08 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		74DE2ADB2DC683B700748A08 /* AuthRouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouterView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		74DE2A942DC56E4500748A08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		74DE2A8E2DC56E4500748A08 = {
+			isa = PBXGroup;
+			children = (
+				74DE2AAD2DC56ED000748A08 /* InnStayMobile */,
+				74DE2A982DC56E4500748A08 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		74DE2A982DC56E4500748A08 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2A972DC56E4500748A08 /* InnStayMobile.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		74DE2AA92DC56ED000748A08 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2AA82DC56ED000748A08 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		74DE2AAD2DC56ED000748A08 /* InnStayMobile */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2AB92DC56F1C00748A08 /* App */,
+				74DE2AB82DC56F1900748A08 /* Core */,
+				74DE2AB72DC56F1500748A08 /* Extensions */,
+				74DE2AB62DC56F0F00748A08 /* Models */,
+				74DE2ABA2DC56F5C00748A08 /* Utils */,
+				74DE2AAA2DC56ED000748A08 /* Assets.xcassets */,
+				74DE2AAB2DC56ED000748A08 /* ContentView.swift */,
+				74DE2AA92DC56ED000748A08 /* Preview Content */,
+			);
+			path = InnStayMobile;
+			sourceTree = "<group>";
+		};
+		74DE2AB62DC56F0F00748A08 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		74DE2AB72DC56F1500748A08 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		74DE2AB82DC56F1900748A08 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2ADA2DC683A100748A08 /* Authenticator */,
+				74DE2ACD2DC651EA00748A08 /* Components */,
+				74DE2ABB2DC56FA400748A08 /* Explore */,
+				74DE2ABC2DC56FAA00748A08 /* Listings */,
+				74DE2ABD2DC56FB000748A08 /* MapView */,
+				74DE2ABE2DC56FB800748A08 /* Profile */,
+				74DE2ABF2DC56FD500748A08 /* Root */,
+				74DE2AC02DC56FDA00748A08 /* TabBar */,
+				74DE2AC12DC56FE200748A08 /* Wishlist */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		74DE2AB92DC56F1C00748A08 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2AAC2DC56ED000748A08 /* InnStayApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		74DE2ABA2DC56F5C00748A08 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		74DE2ABB2DC56FA400748A08 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2AC32DC5712E00748A08 /* ExploreView.swift */,
+				74DE2AC92DC63DBE00748A08 /* SearchAndFilterBar.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		74DE2ABC2DC56FAA00748A08 /* Listings */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2AC52DC5768A00748A08 /* ListingItemView.swift */,
+				74DE2ACB2DC64DEF00748A08 /* ListingDetailView.swift */,
+			);
+			path = Listings;
+			sourceTree = "<group>";
+		};
+		74DE2ABD2DC56FB000748A08 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MapView;
+			sourceTree = "<group>";
+		};
+		74DE2ABE2DC56FB800748A08 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		74DE2ABF2DC56FD500748A08 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		74DE2AC02DC56FDA00748A08 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		74DE2AC12DC56FE200748A08 /* Wishlist */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Wishlist;
+			sourceTree = "<group>";
+		};
+		74DE2ACD2DC651EA00748A08 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2ACE2DC6521200748A08 /* ListingImageCarouselView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		74DE2AD02DC67CC200748A08 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2AD52DC6819400748A08 /* LoginScreen.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		74DE2AD72DC682FA00748A08 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2AD82DC6830E00748A08 /* SignUpScreen.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		74DE2ADA2DC683A100748A08 /* Authenticator */ = {
+			isa = PBXGroup;
+			children = (
+				74DE2ADB2DC683B700748A08 /* AuthRouterView.swift */,
+				74DE2AD72DC682FA00748A08 /* SignUp */,
+				74DE2AD02DC67CC200748A08 /* Login */,
+			);
+			path = Authenticator;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		74DE2A962DC56E4500748A08 /* InnStayMobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74DE2AA52DC56E4800748A08 /* Build configuration list for PBXNativeTarget "InnStayMobile" */;
+			buildPhases = (
+				74DE2A932DC56E4500748A08 /* Sources */,
+				74DE2A942DC56E4500748A08 /* Frameworks */,
+				74DE2A952DC56E4500748A08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InnStayMobile;
+			packageProductDependencies = (
+			);
+			productName = InnStay;
+			productReference = 74DE2A972DC56E4500748A08 /* InnStayMobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		74DE2A8F2DC56E4500748A08 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					74DE2A962DC56E4500748A08 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = 74DE2A922DC56E4500748A08 /* Build configuration list for PBXProject "InnStayMobile" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 74DE2A8E2DC56E4500748A08;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 74DE2A982DC56E4500748A08 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				74DE2A962DC56E4500748A08 /* InnStayMobile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		74DE2A952DC56E4500748A08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74DE2AAE2DC56ED000748A08 /* Preview Assets.xcassets in Resources */,
+				74DE2AAF2DC56ED000748A08 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		74DE2A932DC56E4500748A08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74DE2ACF2DC6521200748A08 /* ListingImageCarouselView.swift in Sources */,
+				74DE2AB02DC56ED000748A08 /* ContentView.swift in Sources */,
+				74DE2ADC2DC683B700748A08 /* AuthRouterView.swift in Sources */,
+				74DE2AD92DC6830E00748A08 /* SignUpScreen.swift in Sources */,
+				74DE2AC62DC5768A00748A08 /* ListingItemView.swift in Sources */,
+				74DE2AC42DC5712E00748A08 /* ExploreView.swift in Sources */,
+				74DE2ACA2DC63DBE00748A08 /* SearchAndFilterBar.swift in Sources */,
+				74DE2AD62DC6819400748A08 /* LoginScreen.swift in Sources */,
+				74DE2ACC2DC64DEF00748A08 /* ListingDetailView.swift in Sources */,
+				74DE2AB12DC56ED000748A08 /* InnStayApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		74DE2AA32DC56E4800748A08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		74DE2AA42DC56E4800748A08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		74DE2AA62DC56E4800748A08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"InnStayMobile/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rrs.InnStay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		74DE2AA72DC56E4800748A08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"InnStayMobile/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rrs.InnStay;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		74DE2A922DC56E4500748A08 /* Build configuration list for PBXProject "InnStayMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74DE2AA32DC56E4800748A08 /* Debug */,
+				74DE2AA42DC56E4800748A08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74DE2AA52DC56E4800748A08 /* Build configuration list for PBXNativeTarget "InnStayMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74DE2AA62DC56E4800748A08 /* Debug */,
+				74DE2AA72DC56E4800748A08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 74DE2A8F2DC56E4500748A08 /* Project object */;
+}
