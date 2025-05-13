@@ -13,6 +13,7 @@ import CentralApartments from "./CentralApartments";
 import Login from "./Login";
 import Register from "./Register";
 import Search from "./Search";
+import View from "./View";
 
 import './App.css';
 
@@ -108,6 +109,7 @@ export default function App() {
         <Route path="/central-apartments" element={<CentralApartments />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/hotel/:id" element={<View />} />
       </Routes>
     </Router>
   );

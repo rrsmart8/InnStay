@@ -35,3 +35,26 @@ def get_hotels():
 
     return jsonify(hotels_list), 200
 
+@hotels_bp.route("/<int:hotel_id>/details", methods=["GET"])
+def get_hotel_details(hotel_id):
+    hotel = Hotel.query.get_or_404(hotel_id)
+    rooms = Room.query.filter_by(hotel_id=hotel_id).all()
+
+    return jsonify({
+        "id": hotel.id,
+        "name": hotel.name,
+        "location": hotel.location,
+        "description": hotel.description,
+        "image": f"/static/hotels/{hotel.image}" if hotel.image else None,
+        "rooms": [
+            {
+                "id": room.id,
+                "room_no": room.room_no,
+                "room_type": room.room_type,
+                "price_per_night": room.price_per_night,
+                "image": f"/static/rooms/{room.image}" if room.image else None,
+                "facilities": room.facilities.split(", ")
+            }
+            for room in rooms
+        ]
+    }), 200

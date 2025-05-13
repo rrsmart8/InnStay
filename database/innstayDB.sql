@@ -147,184 +147,184 @@ INSERT INTO hotels (name, location, description, image)
 VALUES ('Vila Camelia', 'Sinaia, Romania', 'Vila Camelia is a beautiful villa in Sinaia, featuring comfortable accommodations and a lovely garden. It’s a great choice for those seeking tranquility and nature.', 'sinaia4.jpg');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (1, '101', 'Deluxe Room', 150.00, 'available', './rooms_images/azuga1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (1, '101', 'Deluxe Room', 150.00, 'available', 'azuga1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (1, '102', 'Superior Room', 200.00, 'available', './rooms_images/azuga1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (1, '102', 'Superior Room', 200.00, 'available', 'azuga1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (1, '103', 'Family Room', 250.00, 'available', './rooms_images/azuga1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (1, '103', 'Family Room', 250.00, 'available', 'azuga1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (1, '104', 'Suite', 300.00, 'available', './rooms_images/azuga1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (1, '104', 'Suite', 300.00, 'available', 'azuga1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (2, '201', 'Standard Room', 120.00, 'available', './rooms_images/azuga2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (2, '201', 'Standard Room', 120.00, 'available', 'azuga2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (2, '202', 'Deluxe Room', 180.00, 'available', './rooms_images/azuga2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (2, '202', 'Deluxe Room', 180.00, 'available', 'azuga2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (2, '203', 'Superior Room', 220.00, 'available', './rooms_images/azuga2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (2, '203', 'Superior Room', 220.00, 'available', 'azuga2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (2, '204', 'Family Room', 270.00, 'available', './rooms_images/azuga2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (2, '204', 'Family Room', 270.00, 'available', 'azuga2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (3, '301', 'Standard Room', 110.00, 'available', './rooms_images/azuga3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (3, '301', 'Standard Room', 110.00, 'available', 'azuga3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (3, '302', 'Deluxe Room', 160.00, 'available', './rooms_images/azuga3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (3, '302', 'Deluxe Room', 160.00, 'available', 'azuga3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (3, '303', 'Superior Room', 210.00, 'available', './rooms_images/azuga3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (3, '303', 'Superior Room', 210.00, 'available', 'azuga3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (3, '304', 'Family Room', 260.00, 'available', './rooms_images/azuga3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (3, '304', 'Family Room', 260.00, 'available', 'azuga3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (4, '401', 'Standard Room', 130.00, 'available', './rooms_images/azuga4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (4, '401', 'Standard Room', 130.00, 'available', 'azuga4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (4, '402', 'Deluxe Room', 190.00, 'available', './rooms_images/azuga4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (4, '402', 'Deluxe Room', 190.00, 'available', 'azuga4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (4, '403', 'Superior Room', 240.00, 'available', './rooms_images/azuga4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (4, '403', 'Superior Room', 240.00, 'available', 'azuga4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (4, '404', 'Family Room', 290.00, 'available', './rooms_images/azuga4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (4, '404', 'Family Room', 290.00, 'available', 'azuga4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (5, '501', 'Standard Room', 140.00, 'available', './rooms_images/busteni1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (5, '501', 'Standard Room', 140.00, 'available', 'busteni1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (5, '502', 'Deluxe Room', 200.00, 'available', './rooms_images/busteni1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (5, '502', 'Deluxe Room', 200.00, 'available', 'busteni1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (5, '503', 'Superior Room', 250.00, 'available', './rooms_images/busteni1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (5, '503', 'Superior Room', 250.00, 'available', 'busteni1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (5, '504', 'Family Room', 300.00, 'available', './rooms_images/busteni1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (5, '504', 'Family Room', 300.00, 'available', 'busteni1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (6, '601', 'Standard Room', 150.00, 'available', './rooms_images/busteni2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (6, '601', 'Standard Room', 150.00, 'available', 'busteni2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (6, '602', 'Deluxe Room', 210.00, 'available', './rooms_images/busteni2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (6, '602', 'Deluxe Room', 210.00, 'available', 'busteni2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (6, '603', 'Superior Room', 260.00, 'available', './rooms_images/busteni2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (6, '603', 'Superior Room', 260.00, 'available', 'busteni2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (6, '604', 'Family Room', 310.00, 'available', './rooms_images/busteni2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (6, '604', 'Family Room', 310.00, 'available', 'busteni2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (7, '701', 'Standard Room', 160.00, 'available', './rooms_images/busteni3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (7, '701', 'Standard Room', 160.00, 'available', 'busteni3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (7, '702', 'Deluxe Room', 220.00, 'available', './rooms_images/busteni3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (7, '702', 'Deluxe Room', 220.00, 'available', 'busteni3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (7, '703', 'Superior Room', 270.00, 'available', './rooms_images/busteni3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (7, '703', 'Superior Room', 270.00, 'available', 'busteni3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (7, '704', 'Family Room', 320.00, 'available', './rooms_images/busteni3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (7, '704', 'Family Room', 320.00, 'available', 'busteni3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (8, '801', 'Standard Room', 170.00, 'available', './rooms_images/busteni4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (8, '801', 'Standard Room', 170.00, 'available', 'busteni4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (8, '802', 'Deluxe Room', 230.00, 'available', './rooms_images/busteni4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (8, '802', 'Deluxe Room', 230.00, 'available', 'busteni4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (8, '803', 'Superior Room', 280.00, 'available', './rooms_images/busteni4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (8, '803', 'Superior Room', 280.00, 'available', 'busteni4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (8, '804', 'Family Room', 330.00, 'available', './rooms_images/busteni4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (8, '804', 'Family Room', 330.00, 'available', 'busteni4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (9, '901', 'Standard Room', 180.00, 'available', './rooms_images/poianabrasov1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (9, '901', 'Standard Room', 180.00, 'available', 'poianabrasov1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (9, '902', 'Deluxe Room', 240.00, 'available', './rooms_images/poianabrasov1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (9, '902', 'Deluxe Room', 240.00, 'available', 'poianabrasov1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (9, '903', 'Superior Room', 290.00, 'available', './rooms_images/poianabrasov1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (9, '903', 'Superior Room', 290.00, 'available', 'poianabrasov1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (9, '904', 'Family Room', 340.00, 'available', './rooms_images/poianabrasov1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (9, '904', 'Family Room', 340.00, 'available', 'poianabrasov1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (10, '1001', 'Standard Room', 190.00, 'available', './rooms_images/poianabrasov2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (10, '1001', 'Standard Room', 190.00, 'available', 'poianabrasov2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (10, '1002', 'Deluxe Room', 250.00, 'available', './rooms_images/poianabrasov2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (10, '1002', 'Deluxe Room', 250.00, 'available', 'poianabrasov2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (10, '1003', 'Superior Room', 300.00, 'available', './rooms_images/poianabrasov2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (10, '1003', 'Superior Room', 300.00, 'available', 'poianabrasov2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (10, '1004', 'Family Room', 350.00, 'available', './rooms_images/poianabrasov2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (10, '1004', 'Family Room', 350.00, 'available', 'poianabrasov2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (11, '1101', 'Standard Room', 200.00, 'available', './rooms_images/poianabrasov3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (11, '1101', 'Standard Room', 200.00, 'available', 'poianabrasov3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (11, '1102', 'Deluxe Room', 260.00, 'available', './rooms_images/poianabrasov3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (11, '1102', 'Deluxe Room', 260.00, 'available', 'poianabrasov3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (11, '1103', 'Superior Room', 310.00, 'available', './rooms_images/poianabrasov3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (11, '1103', 'Superior Room', 310.00, 'available', 'poianabrasov3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (11, '1104', 'Family Room', 360.00, 'available', './rooms_images/poianabrasov3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (11, '1104', 'Family Room', 360.00, 'available', 'poianabrasov3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (12, '1201', 'Standard Room', 210.00, 'available', './rooms_images/poianabrasov4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (12, '1201', 'Standard Room', 210.00, 'available', 'poianabrasov4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (12, '1202', 'Deluxe Room', 270.00, 'available', './rooms_images/poianabrasov4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (12, '1202', 'Deluxe Room', 270.00, 'available', 'poianabrasov4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (12, '1203', 'Superior Room', 320.00, 'available', './rooms_images/poianabrasov4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (12, '1203', 'Superior Room', 320.00, 'available', 'poianabrasov4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (12, '1204', 'Family Room', 370.00, 'available', './rooms_images/poianabrasov4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (12, '1204', 'Family Room', 370.00, 'available', 'poianabrasov4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (13, '1301', 'Standard Room', 220.00, 'available', './rooms_images/random2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (13, '1301', 'Standard Room', 220.00, 'available', 'random2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (13, '1302', 'Deluxe Room', 280.00, 'available', './rooms_images/random2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (13, '1302', 'Deluxe Room', 280.00, 'available', 'random2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (13, '1303', 'Superior Room', 330.00, 'available', './rooms_images/random2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (13, '1303', 'Superior Room', 330.00, 'available', 'random2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (13, '1304', 'Family Room', 380.00, 'available', './rooms_images/random2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (13, '1304', 'Family Room', 380.00, 'available', 'random2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (14, '1401', 'Standard Room', 230.00, 'available', './rooms_images/random3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (14, '1401', 'Standard Room', 230.00, 'available', 'random3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (14, '1402', 'Deluxe Room', 290.00, 'available', './rooms_images/random3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (14, '1402', 'Deluxe Room', 290.00, 'available', 'random3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (14, '1403', 'Superior Room', 340.00, 'available', './rooms_images/random3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (14, '1403', 'Superior Room', 340.00, 'available', 'random3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (14, '1404', 'Family Room', 390.00, 'available', './rooms_images/random3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (14, '1404', 'Family Room', 390.00, 'available', 'random3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (15, '1501', 'Standard Room', 240.00, 'available', './rooms_images/random4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (15, '1501', 'Standard Room', 240.00, 'available', 'random4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (15, '1502', 'Deluxe Room', 300.00, 'available', './rooms_images/random4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (15, '1502', 'Deluxe Room', 300.00, 'available', 'random4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (15, '1503', 'Superior Room', 350.00, 'available', './rooms_images/random4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (15, '1503', 'Superior Room', 350.00, 'available', 'random4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (15, '1504', 'Family Room', 400.00, 'available', './rooms_images/random4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (15, '1504', 'Family Room', 400.00, 'available', 'random4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (16, '1601', 'Standard Room', 250.00, 'available', './rooms_images/random5_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (16, '1601', 'Standard Room', 250.00, 'available', 'random5_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (16, '1602', 'Deluxe Room', 310.00, 'available', './rooms_images/random5_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');  
+VALUES (16, '1602', 'Deluxe Room', 310.00, 'available', 'random5_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');  
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (16, '1603', 'Superior Room', 360.00, 'available', './rooms_images/random5_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (16, '1603', 'Superior Room', 360.00, 'available', 'random5_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (16, '1604', 'Family Room', 410.00, 'available', './rooms_images/random5_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (16, '1604', 'Family Room', 410.00, 'available', 'random5_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (17, '1701', 'Standard Room', 260.00, 'available', './rooms_images/sinaia1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (17, '1701', 'Standard Room', 260.00, 'available', 'sinaia1_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (17, '1702', 'Deluxe Room', 320.00, 'available', './rooms_images/sinaia1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (17, '1702', 'Deluxe Room', 320.00, 'available', 'sinaia1_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (17, '1703', 'Superior Room', 370.00, 'available', './rooms_images/sinaia1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (17, '1703', 'Superior Room', 370.00, 'available', 'sinaia1_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (17, '1704', 'Family Room', 420.00, 'available', './rooms_images/sinaia1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (17, '1704', 'Family Room', 420.00, 'available', 'sinaia1_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (18, '1801', 'Standard Room', 270.00, 'available', './rooms_images/sinaia2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (18, '1801', 'Standard Room', 270.00, 'available', 'sinaia2_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (18, '1802', 'Deluxe Room', 330.00, 'available', './rooms_images/sinaia2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (18, '1802', 'Deluxe Room', 330.00, 'available', 'sinaia2_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (18, '1803', 'Superior Room', 380.00, 'available', './rooms_images/sinaia2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (18, '1803', 'Superior Room', 380.00, 'available', 'sinaia2_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (18, '1804', 'Family Room', 430.00, 'available', './rooms_images/sinaia2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (18, '1804', 'Family Room', 430.00, 'available', 'sinaia2_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (19, '1901', 'Standard Room', 280.00, 'available', './rooms_images/sinaia3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (19, '1901', 'Standard Room', 280.00, 'available', 'sinaia3_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (19, '1902', 'Deluxe Room', 340.00, 'available', './rooms_images/sinaia3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (19, '1902', 'Deluxe Room', 340.00, 'available', 'sinaia3_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (19, '1903', 'Superior Room', 390.00, 'available', './rooms_images/sinaia3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (19, '1903', 'Superior Room', 390.00, 'available', 'sinaia3_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (19, '1904', 'Family Room', 440.00, 'available', './rooms_images/sinaia3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (19, '1904', 'Family Room', 440.00, 'available', 'sinaia3_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (20, '2001', 'Standard Room', 290.00, 'available', './rooms_images/sinaia4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (20, '2001', 'Standard Room', 290.00, 'available', 'sinaia4_1.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (20, '2002', 'Deluxe Room', 350.00, 'available', './rooms_images/sinaia4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (20, '2002', 'Deluxe Room', 350.00, 'available', 'sinaia4_2.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (20, '2003', 'Superior Room', 400.00, 'available', './rooms_images/sinaia4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (20, '2003', 'Superior Room', 400.00, 'available', 'sinaia4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
-VALUES (20, '2004', 'Family Room', 450.00, 'available', './rooms_images/sinaia4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service');
+VALUES (20, '2004', 'Family Room', 450.00, 'available', 'sinaia4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
 INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
 VALUES (1, 1, 2, '2025-06-15', '2025-06-18', 'confirmed');

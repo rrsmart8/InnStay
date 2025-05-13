@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 from config import Config
 from extensions import db, jwt
@@ -24,12 +24,7 @@ def init_database(app):
         return False
 
 def create_app():
-    app = Flask(
-        __name__,
-        static_folder="hotels_images",          # folderul local cu imaginile
-        static_url_path="/static/hotels"        # URL-ul public prin care se vor accesa
-    )
-
+    app = Flask(__name__)
     app.config.from_object(Config)
     
     # Initialize extensions
@@ -63,6 +58,15 @@ def create_app():
     from routes.search import search_bp
     app.register_blueprint(search_bp, url_prefix="/api/search")
 
+    # Serve hotel images
+    @app.route('/static/hotels/<path:filename>')
+    def serve_hotel_image(filename):
+        return send_from_directory(os.path.join(app.root_path, './hotels_images'), filename)
+
+    # Serve room images
+    @app.route('/static/rooms/<path:filename>')
+    def serve_room_image(filename):
+        return send_from_directory(os.path.join(app.root_path, './rooms_images'), filename)
 
     return app
 

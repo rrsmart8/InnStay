@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "./api/axios";
 import Header from "./Header";  // 🔥 nou
 import "./Search.css";
@@ -8,6 +8,7 @@ function Search() {
   const [searchParams] = useSearchParams();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const destination = searchParams.get("destination") || "";
   const checkin = searchParams.get("checkin") || "";
@@ -57,7 +58,7 @@ function Search() {
                   <h3>{hotel.name}</h3>
                   <p>{hotel.location}</p>
                   <p>{hotel.description}</p>
-                  <button className="view-btn" disabled>
+                  <button className="view-btn" onClick={() => navigate(`/hotel/${hotel.id}`)}>
                     View
                   </button>
                 </div>
