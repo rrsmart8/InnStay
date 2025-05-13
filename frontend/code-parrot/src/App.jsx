@@ -15,6 +15,7 @@ import Register from "./Register";
 import Search from "./Search";
 import View from "./View";
 import Header from "./Header"; // ✅ ADĂUGAT
+import MyBookings from "./MyBookings";
 
 import './App.css';
 
@@ -97,6 +98,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/hotel/:id" element={<View />} />
+        <Route path="/my-bookings" element={<MyBookings />} />
       </Routes>
     </Router>
   );

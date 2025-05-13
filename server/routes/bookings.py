@@ -106,3 +106,31 @@ def get_unavailable_rooms():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+@bookings_bp.route("/my", methods=["GET"])
+@jwt_required()
+def get_user_bookings():
+    user_id = int(get_jwt_identity())
+
+    bookings = Booking.query.filter_by(user_id=user_id).all()
+
+    result = []
+    for booking in bookings:
+        room = booking.room
+        hotel = room.hotel
+
+        result.append({
+            "id": booking.id,
+            "room_id": booking.room_id,
+            "check_in_date": booking.check_in_date.isoformat(),
+            "check_out_date": booking.check_out_date.isoformat(),
+            "status": booking.status,
+            "created_at": booking.created_at.isoformat() if booking.created_at else None,
+            "hotel": hotel.name,
+            "hotel_location": hotel.location,
+            "room_type": room.room_type,
+            "room_image": f"/static/rooms/{room.image}" if room.image else None,
+            "price_per_night": room.price_per_night
+        })
+
+    return jsonify(result), 200
