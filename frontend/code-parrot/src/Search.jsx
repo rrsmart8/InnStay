@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "./api/axios";
-import Header from "./Header";  // 🔥 nou
+import Header from "./Header";
 import "./Search.css";
 
 function Search() {
@@ -10,10 +10,14 @@ function Search() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const destination = searchParams.get("destination") || "";
-  const checkin = searchParams.get("checkin") || "";
-  const checkout = searchParams.get("checkout") || "";
-  const roomType = searchParams.get("room_type") || "Standard Room";
+  const [destination, setDestination] = useState(searchParams.get("destination") || "");
+  const [checkin, setCheckin] = useState(searchParams.get("checkin") || "");
+  const [checkout, setCheckout] = useState(searchParams.get("checkout") || "");
+  const [roomType, setRoomType] = useState(searchParams.get("room_type") || "Standard Room");
+
+  const handleSearch = () => {
+    navigate(`/search?destination=${destination}&checkin=${checkin}&checkout=${checkout}&room_type=${encodeURIComponent(roomType)}`);
+  };
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -35,6 +39,23 @@ function Search() {
   return (
     <>
       <Header />
+
+      {/* Search Bar duplicated from App.jsx but WITHOUT heading/subtitle */}
+      <section className="search-section">
+        <div className="search-bar">
+          <input type="text" placeholder="Destination" value={destination} onChange={(e) => setDestination(e.target.value)} />
+          <input type="date" value={checkin} onChange={(e) => setCheckin(e.target.value)} />
+          <input type="date" value={checkout} onChange={(e) => setCheckout(e.target.value)} />
+          <select value={roomType} onChange={(e) => setRoomType(e.target.value)}>
+            <option value="Standard Room">Standard Room</option>
+            <option value="Deluxe Room">Deluxe Room</option>
+            <option value="Superior Room">Superior Room</option>
+            <option value="Family Room">Family Room</option>
+          </select>
+          <button className="primary" onClick={handleSearch}>Search</button>
+        </div>
+      </section>
+
       <div className="search-results-container">
         <h2>Search Results</h2>
         {loading ? (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "./api/axios";
 import "./View.css";
+import Header from "./Header";
 
 function View() {
   const { id } = useParams();
@@ -95,6 +96,8 @@ function View() {
   if (!hotel) return <div className="error">Hotel not found.</div>;
 
   return (
+  <>
+    <Header />
     <div className="hotel-view-container">
       <div className="hotel-header">
         <h2>{hotel.name}</h2>
@@ -200,6 +203,7 @@ function View() {
         </div>
       </div>
     </div>
+  </>
   );
 }
 

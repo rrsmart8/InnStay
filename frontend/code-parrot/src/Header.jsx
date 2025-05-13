@@ -14,7 +14,7 @@ function Header() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
     navigate("/");
-    window.location.reload(); // Refresh UI after logout
+    window.location.reload();
   };
 
   return (
@@ -25,9 +25,19 @@ function Header() {
       </Link>
 
       <nav>
-        <a href="#">Discover</a>
-        <a href="#">Favorites</a>
-        <a href="#">Help</a>
+        {!token ? (
+          <>
+            <a href="#">Discover</a>
+            <a href="#">Favorites</a>
+            <a href="#">Help</a>
+          </>
+        ) : (
+          <>
+            <Link to="/my-bookings">Bookings</Link>
+            <Link to="/my-reviews">Reviews</Link>
+            <Link to="/recommendations">Recommendations</Link>
+          </>
+        )}
       </nav>
 
       <div className="auth-buttons">
