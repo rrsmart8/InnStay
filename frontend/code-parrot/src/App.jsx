@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import axios from "./api/axios";
 
 import reactLogo from './assets/react.svg';
@@ -14,6 +14,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Search from "./Search";
 import View from "./View";
+import Header from "./Header"; // ✅ ADĂUGAT
 
 import './App.css';
 
@@ -39,22 +40,8 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/* Header */}
-      <header className="header">
-        <Link to="/" className="logo" style={{ textDecoration: "none" }}>
-          <img src={reactLogo} alt="InnStay logo" />
-          <span>InnStay</span>
-        </Link>
-        <nav>
-          <a href="#">Discover</a>
-          <a href="#">Favorites</a>
-          <a href="#">Help</a>
-        </nav>
-        <div className="auth-buttons">
-          <button className="secondary" onClick={() => navigate("/login")}>Log in</button>
-          <button className="primary" onClick={() => navigate("/register")}>Sign up</button>
-        </div>
-      </header>
+      {/* ✅ Înlocuim header-ul hardcodat */}
+      <Header />
 
       {/* Search Bar */}
       <section className="search-section">

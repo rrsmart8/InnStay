@@ -21,11 +21,40 @@ function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically handle the registration logic
-    console.log('Registration attempt:', formData);
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: "user"  // sau lasă selectabil din UI dacă vrei
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Account created successfully!");
+        navigate("/login");
+      } else {
+        alert(data.msg || "Registration failed");
+      }
+    } catch (error) {
+      alert("Something went wrong. Try again.");
+      console.error(error);
+    }
   };
+
 
   return (
     <div className="auth-container">

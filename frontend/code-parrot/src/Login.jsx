@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import reactLogo from './assets/react.svg';
 import './App.css';
+import axios from "./api/axios"; 
 
 function Login() {
   const navigate = useNavigate();
@@ -18,10 +19,27 @@ function Login() {
     });
   };
 
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically handle the login logic
-    console.log('Login attempt:', formData);
+    try {
+      const res = await axios.post("/auth/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+
+
+      
+      const { access_token, user } = res.data;
+      localStorage.setItem("token", access_token);
+      localStorage.setItem("user", JSON.stringify(user));
+      console.log("Login successful:", access_token); // ✅ nu `token`
+      navigate("/");
+
+    } catch (err) {
+      alert("Login failed. Invalid credentials.");
+      console.error("Login error:", err);
+    }
   };
 
   return (
