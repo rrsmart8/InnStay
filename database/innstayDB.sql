@@ -315,19 +315,3 @@ INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image,
 VALUES (20, '2003', 'Superior Room', 400.00, 'available', 'sinaia4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
 VALUES (20, '2004', 'Family Room', 450.00, 'available', 'sinaia4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (1, 1, 2, '2025-06-15', '2025-06-18', 'confirmed');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (2, 3, 1, '2025-07-01', '2025-07-05', 'pending');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (3, 2, 4, '2025-08-10', '2025-08-15', 'cancelled');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (1, 5, 2, '2025-09-01', '2025-09-03', 'confirmed');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (2, 4, 3, '2025-07-20', '2025-07-25', 'confirmed');
-

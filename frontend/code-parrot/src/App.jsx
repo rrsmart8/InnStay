@@ -23,7 +23,6 @@ function Home() {
   const navigate = useNavigate();
   const [hotels, setHotels] = useState([]);
 
-  // 🔍 Search states
   const [destination, setDestination] = useState("");
   const [checkin, setCheckin] = useState("");
   const [checkout, setCheckout] = useState("");
@@ -41,7 +40,6 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/* ✅ Înlocuim header-ul hardcodat */}
       <Header />
 
       {/* Search Bar */}
@@ -76,6 +74,11 @@ function Home() {
                   <h3>{hotel.name}</h3>
                   <p style={{ color: "#ff385c", fontWeight: 600 }}>{hotel.location}</p>
                   <p style={{ color: "#444", fontSize: "0.95rem", marginTop: 8 }}>{hotel.description}</p>
+                  {hotel.min_price && (
+                    <p style={{ fontWeight: 600, marginTop: "0.5rem" }}>
+                      From {hotel.min_price} RON / night
+                    </p>
+                  )}
                 </div>
               </div>
             ))
