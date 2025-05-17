@@ -5,6 +5,7 @@ import "./View.css";
 import Header from "./Header";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import GuestReservationPopup from "./components/GuestReservationPopup";
 
 function addOneDay(date) {
   const d = new Date(date);
@@ -43,7 +44,9 @@ function View() {
         : parseDate(checkoutParam)
   );
   const [unavailableRoomIds, setUnavailableRoomIds] = useState([]);
+  const [showGuestPopup, setShowGuestPopup] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   // Load hotel details
   useEffect(() => {
@@ -99,9 +102,10 @@ function View() {
   const handleReserve = async () => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
-      alert("You must be logged in to book a room.");
+      setShowGuestPopup(true);
       return;
     }
+
     try {
       const response = await axios.post(
         "/bookings/",
@@ -118,8 +122,8 @@ function View() {
         }
       );
       setShowSuccess(true);
+      setSuccessMessage("Booking successful!");
       setTimeout(() => setShowSuccess(false), 2500);
-      console.log("Booking response:", response.data);
     } catch (error) {
       if (error.response?.status === 409) {
         alert("This room is already booked for the selected dates.");
@@ -127,6 +131,27 @@ function View() {
         console.error("Booking error:", error.response?.data || error.message);
         alert("Failed to book the room. Please try again.");
       }
+    }
+  };
+
+  const handleGuestReservation = async (guestData) => {
+    try {
+      const response = await axios.post("/bookings/guest", {
+        room_id: selectedRoomId,
+        guest_name: guestData.guest_name,
+        guest_email: guestData.guest_email,
+        guests: guestData.guests,
+        check_in_date: checkIn ? `${checkIn.getFullYear()}-${String(checkIn.getMonth() + 1).padStart(2, '0')}-${String(checkIn.getDate()).padStart(2, '0')}` : null,
+        check_out_date: checkOut ? `${checkOut.getFullYear()}-${String(checkOut.getMonth() + 1).padStart(2, '0')}-${String(checkOut.getDate()).padStart(2, '0')}` : null,
+      });
+
+      setShowGuestPopup(false);
+      setShowSuccess(true);
+      setSuccessMessage("Reservation request submitted successfully! We'll contact you soon.");
+      setTimeout(() => setShowSuccess(false), 2500);
+    } catch (error) {
+      console.error("Guest reservation error:", error.response?.data || error.message);
+      alert("Failed to submit reservation request. Please try again.");
     }
   };
 
@@ -138,9 +163,15 @@ function View() {
       <Header />
       {showSuccess && (
         <div className="booking-success-popup" onClick={() => setShowSuccess(false)}>
-          Booking successful!
+          {successMessage}
         </div>
       )}
+      <GuestReservationPopup
+        isOpen={showGuestPopup}
+        onClose={() => setShowGuestPopup(false)}
+        onSubmit={handleGuestReservation}
+        roomDetails={selectedRoom}
+      />
       <div className="hotel-view-container">
         <div className="hotel-header">
           <h2>{hotel.name}</h2>

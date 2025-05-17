@@ -75,6 +75,8 @@ CREATE TABLE recommendations (
     FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
 );
 
+INSERT INTO users (username, password, email, role)
+VALUES ('guest', 'guest', 'guest@innstay.com', 'user');
 
 INSERT INTO hotels (name, location, description, image)
 VALUES ('HOTEL LUX GARDEN', 'Azuga, Romania', 'Lux Garden Hotel & Resort invites you to enjoy moments of relaxation in a luxurious setting, surrounded by refinement and elegance, where good taste and harmony are at home. Fresh air, fairy-tale landscapes, and top-level comfort! Perfectly located at the base of the ski slopes and just a few steps away from the gondola’s lower station in Azuga, Lux Garden is the only five-star hotel that offers you an oasis of tranquility, comfort, and dedicated services.', 'azuga1.jpg');

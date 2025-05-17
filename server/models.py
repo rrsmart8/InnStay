@@ -83,3 +83,17 @@ class Recommendation(db.Model):
     hotel_id = db.Column(db.Integer, db.ForeignKey('hotels.id'), nullable=False)
     description = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+class GuestReservation(db.Model):
+    __tablename__ = "guest_reservations"
+    id = db.Column(db.Integer, primary_key=True)
+    room_id = db.Column(db.Integer, db.ForeignKey("rooms.id"), nullable=False)
+    guest_name = db.Column(db.String, nullable=False)
+    guest_email = db.Column(db.String, nullable=False)
+    guests = db.Column(db.Integer, nullable=False)
+    check_in_date = db.Column(db.Date, nullable=False)
+    check_out_date = db.Column(db.Date, nullable=False)
+    status = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    room = db.relationship("Room", backref="guest_reservations", lazy=True)

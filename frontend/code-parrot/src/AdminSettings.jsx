@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const BACKEND_URL = "http://localhost:5000"; // modifică dacă backendul rulează pe alt port
 
@@ -147,7 +148,10 @@ function AdminSettings() {
                       ...(removingId === b.id ? fadeOutStyle : {})
                     }}
                   >
-                    <td style={{ padding: 14, border: "1px solid #eee", color: "#222", fontWeight: 500 }}>{b.user_email}</td>
+                    <td style={{ padding: 14, border: "1px solid #eee", color: b.user_email === "guest@innstay.com" ? "#e11d48" : "#222", fontWeight: 500 }}>
+                      {b.user_email}
+                      {b.user_email === "guest@innstay.com" && <span style={{ fontSize: 12, marginLeft: 6, color: "#e11d48" }}>(guest)</span>}
+                    </td>
                     <td style={{ padding: 14, border: "1px solid #eee", color: "#222", fontWeight: 500 }}>{b.hotel}</td>
                     <td style={{ padding: 14, border: "1px solid #eee", color: "#222" }}>{b.perioada}</td>
                     <td style={{ padding: 14, border: "1px solid #eee", color: "#222" }}>{b.pret} €</td>
