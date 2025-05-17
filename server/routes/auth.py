@@ -56,12 +56,12 @@ def login():
         expires_delta=timedelta(days=1)  # token expiră într-o zi (poți ajusta)
     )
 
-    return jsonify(
-        access_token=access_token,
-        user={
+    return jsonify({
+        "access_token": access_token,
+        "user": {
             "id": user.id,
             "username": user.username,
             "email": user.email,
             "role": user.role
         }
-    )
+    }), 200

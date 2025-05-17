@@ -48,7 +48,7 @@ CREATE TABLE bookings (
     guests INTEGER NOT NULL,
     check_in_date DATE NOT NULL,
     check_out_date DATE NOT NULL,
-    status TEXT NOT NULL CHECK (status IN ('pending', 'confirmed', 'cancelled')),
+    status TEXT NOT NULL CHECK (status IN ('pending', 'confirmed', 'cancelled', 'rejected')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
@@ -315,3 +315,5 @@ INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image,
 VALUES (20, '2003', 'Superior Room', 400.00, 'available', 'sinaia4_3.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
 VALUES (20, '2004', 'Family Room', 450.00, 'available', 'sinaia4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
+
+

@@ -2,7 +2,8 @@ from flask import Flask, send_from_directory
 from flask_cors import CORS
 from config import Config
 from extensions import db, jwt
-from models import Hotel
+from models import Hotel, User
+from werkzeug.security import generate_password_hash
 import os
 
 def init_database(app):
@@ -15,9 +16,26 @@ def init_database(app):
 
     try:
         with app.app_context():
+            # Check database connection
             hotels_count = db.session.query(db.func.count(Hotel.id)).scalar()
             print(f"✅ Connected to SQLite database")
             print(f"📊 Found {hotels_count} hotels")
+
+            # Create admin if not exists
+            admin = User.query.filter_by(username='admin').first()
+            if not admin:
+                admin = User(
+                    username='admin',
+                    password=generate_password_hash('Grasu123'),
+                    email='admin@innstay.com',
+                    role='admin'
+                )
+                db.session.add(admin)
+                db.session.commit()
+                print("✅ Admin user created successfully")
+            else:
+                print("✅ Admin user already exists")
+
         return True
     except Exception as e:
         print(f"❌ Database connection failed: {str(e)}")
@@ -62,6 +80,11 @@ def create_app():
     @app.route('/static/rooms/<path:filename>')
     def serve_room_image(filename):
         return send_from_directory(os.path.join(app.root_path, 'rooms_images'), filename)
+
+    # Serve admin images
+    @app.route('/static/admin/<path:filename>')
+    def serve_admin_image(filename):
+        return send_from_directory(os.path.join(app.root_path, 'admin'), filename)
 
     return app
 

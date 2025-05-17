@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from models import Booking
+from models import Booking, User, Room, Hotel
 from extensions import db
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from datetime import datetime
@@ -134,3 +134,57 @@ def get_user_bookings():
         })
 
     return jsonify(result), 200
+
+# GET all bookings for admin (with user email, hotel, perioada, pret, status, id)
+@bookings_bp.route("/admin/all", methods=["GET"])
+@jwt_required()
+def get_all_bookings_admin():
+    identity = get_jwt_identity()
+    # Verifică dacă userul e admin
+    if isinstance(identity, dict):
+        role = identity.get("role")
+    else:
+        # fallback pentru id simplu
+        user = User.query.get(int(identity))
+        role = user.role if user else None
+    if role != "admin":
+        return jsonify({"msg": "Forbidden"}), 403
+
+    bookings = Booking.query.all()
+    result = []
+    for booking in bookings:
+        user = booking.user
+        room = booking.room
+        hotel = room.hotel
+        result.append({
+            "id": booking.id,
+            "user_email": user.email,
+            "hotel": hotel.name,
+            "perioada": f"{booking.check_in_date.strftime('%d/%m/%Y')} - {booking.check_out_date.strftime('%d/%m/%Y')}",
+            "pret": room.price_per_night,
+            "status": booking.status
+        })
+    return jsonify(result), 200
+
+@bookings_bp.route("/<int:booking_id>/status", methods=["PATCH"])
+@jwt_required()
+def update_booking_status(booking_id):
+    identity = get_jwt_identity()
+    # Verifică dacă userul e admin
+    if isinstance(identity, dict):
+        role = identity.get("role")
+    else:
+        user = User.query.get(int(identity))
+        role = user.role if user else None
+    if role != "admin":
+        return jsonify({"msg": "Forbidden"}), 403
+
+    data = request.get_json()
+    status = data.get("status")
+    if status not in ["confirmed", "cancelled"]:
+        return jsonify({"msg": "Invalid status"}), 400
+
+    booking = Booking.query.get_or_404(booking_id)
+    booking.status = status
+    db.session.commit()
+    return jsonify({"msg": f"Booking {booking_id} status updated to {status}"}), 200
