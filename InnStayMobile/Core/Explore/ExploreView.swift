@@ -1,33 +1,30 @@
-//
-//  ExploreView.swift
-//  InnStay
-//
-//  Created by Rares Carbunaru on 5/3/25.
-//
-
 import SwiftUI
 
 struct ExploreView: View {
+    @StateObject private var viewModel = RoomsViewModel()
+
     var body: some View {
         NavigationStack {
             ScrollView {
-                
                 SearchAndFilterBar()
-                
+
                 LazyVStack(spacing: 32) {
-                    ForEach(0 ... 5, id: \.self) { listing in
+                    ForEach(viewModel.listings) { listing in
                         NavigationLink(value: listing) {
-                            ListingItemView()
-                                .frame(height: 400)
+                            ListingItemView(listing: listing)
+                                .frame(width: 350, height: 400)
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                         }
                     }
                 }
                 .padding()
             }
-            .navigationDestination(for: Int.self) { listing in
-                ListingDetailView()
-                    .navigationBarBackButtonHidden()
+            .onAppear {
+                viewModel.fetchListings()
+            }
+            .navigationDestination(for: RoomListing.self) { listing in
+                ListingDetailView(listing: listing)
+                    .navigationBarBackButtonHidden(true)
                     .navigationBarHidden(true)
             }
         }

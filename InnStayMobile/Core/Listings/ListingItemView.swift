@@ -8,50 +8,48 @@
 import SwiftUI
 
 struct ListingItemView: View {
-    
-    var images = [
-        "listing-1",
-        "listing-2",
-        "listing-3",
-        "listing-4"
-    ]
-    
+    let listing: RoomListing
+
     var body: some View {
-        VStack (spacing: 8) {
-            // images
-            ListingImageCarouselView()
-                .frame(height: 320)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-            
-            // listing details
+        VStack(spacing: 8) {
+            AsyncImage(url: URL(string: "http://127.0.0.1:5000\(listing.image)")) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(height: 320)
+                case .success(let image):
+                    image.resizable()
+                        .scaledToFill()
+                        .frame(height: 320)
+                        .clipped()
+                case .failure:
+                    Color.gray
+                        .frame(height: 320)
+                @unknown default:
+                    EmptyView()
+                }
+            }
+
             HStack(alignment: .top) {
-                // details
                 VStack(alignment: .leading) {
-                    Text("Miami, Florida")
+                    Text(listing.hotel_location)
                         .fontWeight(.semibold)
                         .foregroundStyle(.black)
-                    
-                    Text("12 mi away")
-                        .foregroundStyle(.gray)
-                    
-                    Text("Nov 3 - 10")
-                        .foregroundStyle(.gray)
-                    
+
+                    Text("Nov 3 - 10") // hardcoded example
+
                     HStack(spacing: 4) {
-                        Text("$567")
+                        Text("$\(Int(listing.price_per_night))")
                             .fontWeight(.semibold)
                         Text("night")
                     }
                     .foregroundStyle(.black)
                 }
-                
+
                 Spacer()
-                
-                // rating
-                
+
                 HStack(spacing: 2) {
                     Image(systemName: "star.fill")
-                    
                     Text("4.86")
                 }
                 .foregroundStyle(.black)
@@ -61,6 +59,3 @@ struct ListingItemView: View {
     }
 }
 
-#Preview {
-    ListingItemView()
-}
