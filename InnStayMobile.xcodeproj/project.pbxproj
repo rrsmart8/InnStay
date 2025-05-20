@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7423D01E2DDD34D9004BB3E3 /* UserBooking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7423D01D2DDD34D9004BB3E3 /* UserBooking.swift */; };
+		7423D0202DDD34EB004BB3E3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7423D01F2DDD34EB004BB3E3 /* ProfileViewModel.swift */; };
+		7423D0222DDD3505004BB3E3 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7423D0212DDD3505004BB3E3 /* ProfileView.swift */; };
 		743E13C02DDC8AAB003F836B /* RoomListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13BF2DDC8AAB003F836B /* RoomListing.swift */; };
 		743E13C32DDC8C6B003F836B /* RoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13C22DDC8C6B003F836B /* RoomsViewModel.swift */; };
 		743E13C72DDCD42A003F836B /* DestinationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13C62DDCD42A003F836B /* DestinationSearchView.swift */; };
@@ -28,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7423D01D2DDD34D9004BB3E3 /* UserBooking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBooking.swift; sourceTree = "<group>"; };
+		7423D01F2DDD34EB004BB3E3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		7423D0212DDD3505004BB3E3 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		743E13BF2DDC8AAB003F836B /* RoomListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomListing.swift; path = InnStayMobile/RoomListing.swift; sourceTree = SOURCE_ROOT; };
 		743E13C22DDC8C6B003F836B /* RoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewModel.swift; sourceTree = "<group>"; };
 		743E13C62DDCD42A003F836B /* DestinationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchView.swift; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 			isa = PBXGroup;
 			children = (
 				743E13CB2DDCFE4B003F836B /* BookingService.swift */,
+				7423D01D2DDD34D9004BB3E3 /* UserBooking.swift */,
+				7423D01F2DDD34EB004BB3E3 /* ProfileViewModel.swift */,
+				7423D0212DDD3505004BB3E3 /* ProfileView.swift */,
 			);
 			path = Reservation;
 			sourceTree = "<group>";
@@ -338,9 +347,12 @@
 				74DE2ACA2DC63DBE00748A08 /* SearchAndFilterBar.swift in Sources */,
 				743E13C92DDCFDA4003F836B /* BookingRequest.swift in Sources */,
 				74DE2AD62DC6819400748A08 /* LoginScreen.swift in Sources */,
+				7423D0202DDD34EB004BB3E3 /* ProfileViewModel.swift in Sources */,
 				74DE2ACC2DC64DEF00748A08 /* ListingDetailView.swift in Sources */,
 				74DE2AB12DC56ED000748A08 /* InnStayApp.swift in Sources */,
 				743E13D02DDD07ED003F836B /* GuestBookingRequest.swift in Sources */,
+				7423D0222DDD3505004BB3E3 /* ProfileView.swift in Sources */,
+				7423D01E2DDD34D9004BB3E3 /* UserBooking.swift in Sources */,
 				743E13C32DDC8C6B003F836B /* RoomsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
