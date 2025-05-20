@@ -1,31 +1,40 @@
-//
-//  ListingDetailView.swift
-//  InnStay
-//
-//  Created by Rares Carbunaru on 5/3/25.
-//
-
 import SwiftUI
 import MapKit
 
 struct ListingDetailView: View {
-    
-    var images = [
-        "listing-1",
-        "listing-2",
-        "listing-3",
-        "listing-4"
-    ]
-    
+    let listing: RoomListing
     @Environment(\.dismiss) var dismiss
-    
+
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 45.5821, longitude: 25.5550), // Zona Brasov
+        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    )
+
     var body: some View {
         ScrollView {
             ZStack(alignment: .topLeading) {
-                ListingImageCarouselView()
-                    .frame(height: 320)
-                    .ignoresSafeArea(edges: .top)
-                
+                // Imagine din Flask
+                AsyncImage(url: URL(string: "http://127.0.0.1:5000\(listing.image)")) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(height: 320)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 320)
+                            .clipped()
+                    case .failure:
+                        Color.gray
+                            .frame(height: 320)
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+                .ignoresSafeArea(edges: .top)
+
+                // Custom back button
                 Button {
                     dismiss()
                 } label: {
@@ -36,142 +45,49 @@ struct ListingDetailView: View {
                                 .fill(.white)
                                 .frame(width: 32, height: 32)
                         }
-                    .padding(32)
+                        .padding(32)
                 }
-                
+                .padding(32)
             }
-                
+
             VStack(alignment: .leading, spacing: 8) {
-                Text("Miami Villa")
+                Text("Room \(listing.room_number) - \(listing.room_type)")
                     .font(.title)
                     .fontWeight(.semibold)
-                VStack(alignment: .leading) {
-                    HStack(spacing: 2) {
-                        Image(systemName: "star.fill")
-                        
-                        Text("4.86")
-                        
-                        Text(" - ")
-                        
-                        Text("28 reviews")
-                            .underline()
-                            .fontWeight(.semibold)
-                    }
-                    .foregroundStyle(.black)
-                    
-                    Text("Miami, Florida")
-                }
-                .font(.caption)
+
+                Text(listing.hotel_location)
+                    .font(.subheadline)
+                    .foregroundStyle(.gray)
             }
             .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             Divider()
-            
-            // host info view
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Entire villa hosted by Radu Mazare")
-                        .font(.headline)
-                        .frame(width: 250, alignment: .leading)
-                    
-                    HStack(spacing: 2) {
-                        Text("4 guests -")
-                        Text("4 bedrooms -")
-                        Text("4 beds -")
-                        Text("3 baths")
-                    }
-                    .font(.caption)
-                }
-                .frame(width: 300, alignment: .leading)
-                
-                Spacer()
-                
-                Image("male-profile-photo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 64, height: 64)
-                    .clipShape(Circle())
-            }
-            .padding()
-            
-            Divider()
-            
-            // listing features
-            
-            VStack (alignment: .leading, spacing: 16) {
-                ForEach(0 ..< 2) { feature in
-                    HStack(spacing: 12) {
-                        Image(systemName: "medal")
-                        
-                        VStack(alignment: .leading) {
-                            Text("Superhost")
-                                .font(.footnote)
-                                .fontWeight(.semibold)
-                            Text("Superhosts are experience, highly rates hosts who are commited to providing great stars for guests")
-                                .font(.caption)
-                                .foregroundStyle(.gray)
-                        }
-                        Spacer()
-                    }
-                }
-            }
-            .padding()
-            
-            Divider()
-            
+
             VStack(alignment: .leading, spacing: 16) {
-                Text("Where you'll sleep")
+                Text("Room Information")
                     .font(.headline)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack (spacing: 16) {
-                        ForEach(1 ..< 5) { bedroom in
-                            VStack {
-                                Image(systemName: "bed.double")
-                                
-                                Text("Bedroom \(bedroom)")
-                            }
-                            .frame(width: 132, height: 100)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(lineWidth: 1)
-                                    .foregroundStyle(.gray)
-                            }
-                        }
-                    }
-                }
-                .scrollTargetBehavior(.paging)
+
+                Text("Type: \(listing.room_type)")
+                Text("Price: $\(Int(listing.price_per_night)) per night")
+                Text("Status: \(listing.status.capitalized)")
+                    .foregroundColor(listing.status == "available" ? .green : .red)
             }
             .padding()
-            
+
             Divider()
-            
-            VStack(alignment: .leading, spacing: 16) {
-                Text("What this place offers")
-                    .font(.headline)
-                ForEach(0 ..< 5) { feature in
-                    HStack {
-                        Image(systemName: "wifi")
-                            .frame(width: 32)
-                        Text("Wifi")
-                            .font(.footnote)
-                        Spacer()
-                    }
-                }
-            }
-            .padding()
-            
-            Divider()
-            
+
             VStack(alignment: .leading, spacing: 16) {
                 Text("Where you'll be")
                     .font(.headline)
-                Map()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+
+                Map(coordinateRegion: $region)
                     .frame(height: 200)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                }
-            .padding()
+                    .padding(.horizontal)
+            }
+            .padding(32)
         }
         .ignoresSafeArea()
         .padding(.bottom, 64)
@@ -179,25 +95,28 @@ struct ListingDetailView: View {
             VStack {
                 Divider()
                     .padding(.bottom)
+
                 HStack {
-                    VStack(alignment: .leading) {
-                        Text("$500")
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("$\(Int(listing.price_per_night))")
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                        
+
                         Text("Total before taxes")
                             .font(.footnote)
-                        
-                        Text("Oct 15 - 20")
-                            .font(.footnote)
-                            .fontWeight(.semibold)
-                            .underline()
+// TODO: Add Date Ranges which are not hardcoded
+//                        Text("Oct 15 - 20")
+//                            .font(.footnote)
+//                            .fontWeight(.semibold)
+//                            .underline()
                     }
-                    
+                    .padding(.leading)
+
                     Spacer()
-                    
+
                     Button {
-                        
+                        // rezervare
+                       
                     } label: {
                         Text("Reserve")
                             .foregroundStyle(.white)
@@ -207,14 +126,13 @@ struct ListingDetailView: View {
                             .background(.pink)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
+                    .padding(.horizontal, 32)
                 }
-                .padding(.horizontal, 32)
+                .padding(.horizontal, 42)
             }
             .background(.white)
         }
     }
-}
-
-#Preview {
-    ListingDetailView()
+    
+    
 }

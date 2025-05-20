@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		743E13C02DDC8AAB003F836B /* RoomListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13BF2DDC8AAB003F836B /* RoomListing.swift */; };
+		743E13C32DDC8C6B003F836B /* RoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13C22DDC8C6B003F836B /* RoomsViewModel.swift */; };
+		743E13C72DDCD42A003F836B /* DestinationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13C62DDCD42A003F836B /* DestinationSearchView.swift */; };
 		74DE2AAE2DC56ED000748A08 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DE2AA82DC56ED000748A08 /* Preview Assets.xcassets */; };
 		74DE2AAF2DC56ED000748A08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DE2AAA2DC56ED000748A08 /* Assets.xcassets */; };
 		74DE2AB02DC56ED000748A08 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AAB2DC56ED000748A08 /* ContentView.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		743E13BF2DDC8AAB003F836B /* RoomListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomListing.swift; path = InnStayMobile/RoomListing.swift; sourceTree = SOURCE_ROOT; };
+		743E13C22DDC8C6B003F836B /* RoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewModel.swift; sourceTree = "<group>"; };
+		743E13C62DDCD42A003F836B /* DestinationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchView.swift; sourceTree = "<group>"; };
 		74DE2A972DC56E4500748A08 /* InnStayMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InnStayMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DE2AA82DC56ED000748A08 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		74DE2AAA2DC56ED000748A08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		743E13C12DDC8C55003F836B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				743E13C22DDC8C6B003F836B /* RoomsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		74DE2A8E2DC56E4500748A08 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +89,7 @@
 		74DE2AAD2DC56ED000748A08 /* InnStayMobile */ = {
 			isa = PBXGroup;
 			children = (
+				743E13C12DDC8C55003F836B /* ViewModels */,
 				74DE2AB92DC56F1C00748A08 /* App */,
 				74DE2AB82DC56F1900748A08 /* Core */,
 				74DE2AB72DC56F1500748A08 /* Extensions */,
@@ -90,6 +105,7 @@
 		74DE2AB62DC56F0F00748A08 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				743E13BF2DDC8AAB003F836B /* RoomListing.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -137,6 +153,7 @@
 			children = (
 				74DE2AC32DC5712E00748A08 /* ExploreView.swift */,
 				74DE2AC92DC63DBE00748A08 /* SearchAndFilterBar.swift */,
+				743E13C62DDCD42A003F836B /* DestinationSearchView.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -296,12 +313,15 @@
 				74DE2AB02DC56ED000748A08 /* ContentView.swift in Sources */,
 				74DE2ADC2DC683B700748A08 /* AuthRouterView.swift in Sources */,
 				74DE2AD92DC6830E00748A08 /* SignUpScreen.swift in Sources */,
+				743E13C72DDCD42A003F836B /* DestinationSearchView.swift in Sources */,
 				74DE2AC62DC5768A00748A08 /* ListingItemView.swift in Sources */,
 				74DE2AC42DC5712E00748A08 /* ExploreView.swift in Sources */,
+				743E13C02DDC8AAB003F836B /* RoomListing.swift in Sources */,
 				74DE2ACA2DC63DBE00748A08 /* SearchAndFilterBar.swift in Sources */,
 				74DE2AD62DC6819400748A08 /* LoginScreen.swift in Sources */,
 				74DE2ACC2DC64DEF00748A08 /* ListingDetailView.swift in Sources */,
 				74DE2AB12DC56ED000748A08 /* InnStayApp.swift in Sources */,
+				743E13C32DDC8C6B003F836B /* RoomsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

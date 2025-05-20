@@ -26,7 +26,7 @@ struct AuthRouterView: View {
             })
         case .signup:
             SignupScreen(onSignupSuccess: {
-                screen = .explore
+                screen = .login
             }, onGoToLogin: {
                 screen = .login
             })
