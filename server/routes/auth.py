@@ -2,8 +2,9 @@ from flask import Blueprint, request, jsonify
 from models import User
 from extensions import db
 from flask_jwt_extended import (
-    create_access_token, jwt_required, get_jwt_identity
+    create_access_token, jwt_required, get_jwt_identity, get_jwt
 )
+from datetime import timedelta
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -19,7 +20,11 @@ def register():
     if User.query.filter_by(email=data["email"]).first():
         return jsonify({"msg": "Email already registered"}), 409
 
-    user = User(username=data["username"], email=data["email"], role=data["role"])
+    user = User(
+        username=data["username"],
+        email=data["email"],
+        role=data["role"]
+    )
     user.set_password(data["password"])
     db.session.add(user)
     db.session.commit()
@@ -33,21 +38,30 @@ def login():
     print("Received login:", data)
 
     user = User.query.filter_by(email=data["email"]).first()
-    if not user:
-        print("No user with that email")
-    elif not user.check_password(data["password"]):
-        print("Wrong password")
 
-    if user and user.check_password(data["password"]):
-        token = create_access_token(identity={"id": user.id, "role": user.role})
-        return jsonify(
-            access_token=token,
-            user={
-                "id": user.id,
-                "username": user.username,
-                "email": user.email,
-                "role": user.role
-            }
-        )
-    return jsonify({"msg": "Invalid credentials"}), 401
+    if not user or not user.check_password(data["password"]):
+        return jsonify({"msg": "Invalid credentials"}), 401
 
+    # JWT subject must be a string => use user.id as string
+    # Add user info as custom claims
+    additional_claims = {
+        "username": user.username,
+        "email": user.email,
+        "role": user.role
+    }
+
+    access_token = create_access_token(
+        identity=str(user.id),
+        additional_claims=additional_claims,
+        expires_delta=timedelta(days=1)  # token expiră într-o zi (poți ajusta)
+    )
+
+    return jsonify({
+        "access_token": access_token,
+        "user": {
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "role": user.role
+        }
+    }), 200

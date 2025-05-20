@@ -24,16 +24,22 @@ def get_hotels():
     hotels_list = []
 
     for hotel in hotels:
-        print("Loaded image:", hotel.image)  # debug
+        # Caută toate camerele hotelului
+        rooms = Room.query.filter_by(hotel_id=hotel.id).all()
+        # Obține prețul minim dacă există camere
+        min_price = min([room.price_per_night for room in rooms], default=None)
+
         hotels_list.append({
             "id": hotel.id,
             "name": hotel.name,
             "location": hotel.location,
             "description": hotel.description,
-            "image": f"/static/hotels/{hotel.image}" if hotel.image else None
+            "image": f"/static/hotels/{hotel.image}" if hotel.image else None,
+            "min_price": min_price  # 👈 prețul minim adăugat aici
         })
 
     return jsonify(hotels_list), 200
+
 
 @hotels_bp.route("/<int:hotel_id>/details", methods=["GET"])
 def get_hotel_details(hotel_id):

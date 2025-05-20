@@ -1,33 +1,43 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import reactLogo from "./assets/react.svg";
+import innstayLogo from "./assets/innstay-logo.png";
 import "./App.css";
 
 function Header() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("accessToken");
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
     navigate("/");
-    window.location.reload(); // Refresh UI after logout
+    window.location.reload();
   };
 
   return (
     <header className="header">
       <Link to="/" className="logo" style={{ textDecoration: "none" }}>
-        <img src={reactLogo} alt="InnStay logo" />
+        <img src={innstayLogo} alt="InnStay logo" />
         <span>InnStay</span>
       </Link>
 
       <nav>
-        <a href="#">Discover</a>
-        <a href="#">Favorites</a>
-        <a href="#">Help</a>
+        {!token ? (
+          <>
+            <a href="#">Discover</a>
+            <a href="#">Favorites</a>
+            <a href="#">Help</a>
+          </>
+        ) : (
+          <>
+            <Link to="/my-bookings">Bookings</Link>
+            <Link to="/my-reviews">Reviews</Link>
+            <Link to="/recommendations">Recommendations</Link>
+          </>
+        )}
       </nav>
 
       <div className="auth-buttons">
@@ -39,7 +49,9 @@ function Header() {
         ) : (
           <div className="profile-container">
             <img
-              src="/profile-icon.png"
+              src={user?.role === "admin"
+                ? "http://localhost:5000/static/admin/admin.jpg"
+                : "/profile-icon.png"}
               alt="Profile"
               className="profile-icon"
               onClick={() => setMenuOpen(!menuOpen)}
@@ -50,8 +62,15 @@ function Header() {
             />
             {menuOpen && (
               <div className="dropdown-menu">
-                <p>Hello, {user?.username || "User"}!</p>
-                <button onClick={handleLogout}>Log out</button>
+                {user?.role === "admin" ? (
+                  <p>Hello, Buzzila!</p>
+                ) : (
+                  <p>Hello, {user?.role === "admin" ? "Buzzila" : (user?.username || "User")}!</p>
+                )}
+                {user?.role === "admin" && (
+                  <button style={{ display: 'block', marginBottom: 8 }} onClick={() => navigate("/admin-settings")}>Settings</button>
+                )}
+                <button style={{ display: 'block' }} onClick={handleLogout}>Log out</button>
               </div>
             )}
           </div>

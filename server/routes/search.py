@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from models import Hotel, Room
+from sqlalchemy import func
 
 search_bp = Blueprint("search", __name__)
 
@@ -26,16 +27,23 @@ def search_hotels():
     results = []
     for hotel in hotels:
         matching_rooms = Room.query.filter_by(hotel_id=hotel.id).all()
-
+        
+        # Calculate minimum price for matching rooms
+        min_price = None
         for room in matching_rooms:
             room_level = room_type_order.get(room.room_type, 0)
             if room_level >= requested_level:
-                results.append({
-                    "id": hotel.id,
-                    "name": hotel.name,
-                    "location": hotel.location,
-                    "description": hotel.description,
-                    "image": f"/static/hotels/{hotel.image}" if hotel.image else None
-                })
-                break  # găsit cel puțin o cameră potrivită → includem hotelul
+                if min_price is None or room.price_per_night < min_price:
+                    min_price = room.price_per_night
+
+        if min_price is not None:  # Only include hotels with matching rooms
+            results.append({
+                "id": hotel.id,
+                "name": hotel.name,
+                "location": hotel.location,
+                "description": hotel.description,
+                "image": f"/static/hotels/{hotel.image}" if hotel.image else None,
+                "min_price": min_price
+            })
+
     return jsonify(results), 200

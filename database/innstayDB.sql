@@ -48,7 +48,7 @@ CREATE TABLE bookings (
     guests INTEGER NOT NULL,
     check_in_date DATE NOT NULL,
     check_out_date DATE NOT NULL,
-    status TEXT NOT NULL CHECK (status IN ('pending', 'confirmed', 'cancelled')),
+    status TEXT NOT NULL CHECK (status IN ('pending', 'confirmed', 'cancelled', 'rejected')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (room_id) REFERENCES rooms(id) ON DELETE CASCADE
@@ -75,6 +75,8 @@ CREATE TABLE recommendations (
     FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
 );
 
+INSERT INTO users (username, password, email, role)
+VALUES ('guest', 'guest', 'guest@innstay.com', 'user');
 
 INSERT INTO hotels (name, location, description, image)
 VALUES ('HOTEL LUX GARDEN', 'Azuga, Romania', 'Lux Garden Hotel & Resort invites you to enjoy moments of relaxation in a luxurious setting, surrounded by refinement and elegance, where good taste and harmony are at home. Fresh air, fairy-tale landscapes, and top-level comfort! Perfectly located at the base of the ski slopes and just a few steps away from the gondola’s lower station in Azuga, Lux Garden is the only five-star hotel that offers you an oasis of tranquility, comfort, and dedicated services.', 'azuga1.jpg');
@@ -316,18 +318,4 @@ VALUES (20, '2003', 'Superior Room', 400.00, 'available', 'sinaia4_3.jpg', 'Free
 INSERT INTO rooms (hotel_id, room_no, room_type, price_per_night, status, image, facilities)
 VALUES (20, '2004', 'Family Room', 450.00, 'available', 'sinaia4_4.jpg', 'Free Wi-Fi, Air Conditioning, Mini Bar, TV, Room Service, Spa, Restaurant, Pool');
 
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (1, 1, 2, '2025-06-15', '2025-06-18', 'confirmed');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (2, 3, 1, '2025-07-01', '2025-07-05', 'pending');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (3, 2, 4, '2025-08-10', '2025-08-15', 'cancelled');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (1, 5, 2, '2025-09-01', '2025-09-03', 'confirmed');
-
-INSERT INTO bookings (user_id, room_id, guests, check_in_date, check_out_date, status)
-VALUES (2, 4, 3, '2025-07-20', '2025-07-25', 'confirmed');
 
