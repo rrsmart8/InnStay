@@ -116,6 +116,7 @@ struct ListingDetailView: View {
 
                     Button {
                         // rezervare
+                       
                     } label: {
                         Text("Reserve")
                             .foregroundStyle(.white)
@@ -132,4 +133,6 @@ struct ListingDetailView: View {
             .background(.white)
         }
     }
+    
+    
 }
