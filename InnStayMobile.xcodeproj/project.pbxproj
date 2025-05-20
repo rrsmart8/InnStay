@@ -10,6 +10,9 @@
 		743E13C02DDC8AAB003F836B /* RoomListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13BF2DDC8AAB003F836B /* RoomListing.swift */; };
 		743E13C32DDC8C6B003F836B /* RoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13C22DDC8C6B003F836B /* RoomsViewModel.swift */; };
 		743E13C72DDCD42A003F836B /* DestinationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13C62DDCD42A003F836B /* DestinationSearchView.swift */; };
+		743E13C92DDCFDA4003F836B /* BookingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13C82DDCFDA4003F836B /* BookingRequest.swift */; };
+		743E13CC2DDCFE4B003F836B /* BookingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13CB2DDCFE4B003F836B /* BookingService.swift */; };
+		743E13D02DDD07ED003F836B /* GuestBookingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743E13CF2DDD07ED003F836B /* GuestBookingRequest.swift */; };
 		74DE2AAE2DC56ED000748A08 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DE2AA82DC56ED000748A08 /* Preview Assets.xcassets */; };
 		74DE2AAF2DC56ED000748A08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74DE2AAA2DC56ED000748A08 /* Assets.xcassets */; };
 		74DE2AB02DC56ED000748A08 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74DE2AAB2DC56ED000748A08 /* ContentView.swift */; };
@@ -28,6 +31,9 @@
 		743E13BF2DDC8AAB003F836B /* RoomListing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoomListing.swift; path = InnStayMobile/RoomListing.swift; sourceTree = SOURCE_ROOT; };
 		743E13C22DDC8C6B003F836B /* RoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewModel.swift; sourceTree = "<group>"; };
 		743E13C62DDCD42A003F836B /* DestinationSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchView.swift; sourceTree = "<group>"; };
+		743E13C82DDCFDA4003F836B /* BookingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BookingRequest.swift; path = InnStayMobile/BookingRequest.swift; sourceTree = SOURCE_ROOT; };
+		743E13CB2DDCFE4B003F836B /* BookingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingService.swift; sourceTree = "<group>"; };
+		743E13CF2DDD07ED003F836B /* GuestBookingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GuestBookingRequest.swift; path = InnStayMobile/GuestBookingRequest.swift; sourceTree = SOURCE_ROOT; };
 		74DE2A972DC56E4500748A08 /* InnStayMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InnStayMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74DE2AA82DC56ED000748A08 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		74DE2AAA2DC56ED000748A08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,6 +66,14 @@
 				743E13C22DDC8C6B003F836B /* RoomsViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		743E13CA2DDCFDF2003F836B /* Reservation */ = {
+			isa = PBXGroup;
+			children = (
+				743E13CB2DDCFE4B003F836B /* BookingService.swift */,
+			);
+			path = Reservation;
 			sourceTree = "<group>";
 		};
 		74DE2A8E2DC56E4500748A08 = {
@@ -106,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				743E13BF2DDC8AAB003F836B /* RoomListing.swift */,
+				743E13C82DDCFDA4003F836B /* BookingRequest.swift */,
+				743E13CF2DDD07ED003F836B /* GuestBookingRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,6 +136,7 @@
 		74DE2AB82DC56F1900748A08 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				743E13CA2DDCFDF2003F836B /* Reservation */,
 				74DE2ADA2DC683A100748A08 /* Authenticator */,
 				74DE2ACD2DC651EA00748A08 /* Components */,
 				74DE2ABB2DC56FA400748A08 /* Explore */,
@@ -315,12 +332,15 @@
 				74DE2AD92DC6830E00748A08 /* SignUpScreen.swift in Sources */,
 				743E13C72DDCD42A003F836B /* DestinationSearchView.swift in Sources */,
 				74DE2AC62DC5768A00748A08 /* ListingItemView.swift in Sources */,
+				743E13CC2DDCFE4B003F836B /* BookingService.swift in Sources */,
 				74DE2AC42DC5712E00748A08 /* ExploreView.swift in Sources */,
 				743E13C02DDC8AAB003F836B /* RoomListing.swift in Sources */,
 				74DE2ACA2DC63DBE00748A08 /* SearchAndFilterBar.swift in Sources */,
+				743E13C92DDCFDA4003F836B /* BookingRequest.swift in Sources */,
 				74DE2AD62DC6819400748A08 /* LoginScreen.swift in Sources */,
 				74DE2ACC2DC64DEF00748A08 /* ListingDetailView.swift in Sources */,
 				74DE2AB12DC56ED000748A08 /* InnStayApp.swift in Sources */,
+				743E13D02DDD07ED003F836B /* GuestBookingRequest.swift in Sources */,
 				743E13C32DDC8C6B003F836B /* RoomsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
