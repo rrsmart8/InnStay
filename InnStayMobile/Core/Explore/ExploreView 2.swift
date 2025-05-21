@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct ExploreView: View {
-    
     @State private var searchText = ""
     @State private var showDestinationSearchView = false
     @StateObject private var viewModel = RoomsViewModel()
+    
+    let onLogout: () -> Void  // <-- callback primit de la AuthRouterView
 
     var filteredListings: [RoomListing] {
         if searchText.isEmpty {
@@ -20,15 +21,27 @@ struct ExploreView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                // Top bar: Profile button + SearchBar
+                // Top bar
                 HStack {
+                    Button(action: {
+                        UserDefaults.standard.removeObject(forKey: "auth_token")
+                        onLogout() // <-- revino la login
+                    }) {
+                        Text("Logout")
+                            .font(.subheadline)
+                            .foregroundColor(.red)
+                            .padding(.leading)
+                            .padding(.top, 8)
+                    }
+
                     Spacer()
+
                     NavigationLink(destination: ProfileView()) {
                         Image(systemName: "person.circle.fill")
                             .font(.title2)
                             .foregroundColor(.black)
-                            .padding(.top, 8)
                             .padding(.trailing)
+                            .padding(.top, 8)
                     }
                 }
 
@@ -68,8 +81,4 @@ struct ExploreView: View {
             }
         }
     }
-}
-
-#Preview {
-    ExploreView()
 }

@@ -1,16 +1,10 @@
-//
-//  AuthRouter.swift
-//  InnStay
-//
-//  Created by Rares Carbunaru on 5/3/25.
-//
-
 import SwiftUI
 
 enum AuthScreen {
     case login
     case signup
     case explore
+    case panel
 }
 
 struct AuthRouterView: View {
@@ -20,22 +14,42 @@ struct AuthRouterView: View {
         switch screen {
         case .login:
             LoginScreen(onLoginSuccess: {
-                screen = .explore
+                if let token = UserDefaults.standard.string(forKey: "auth_token"),
+                   let payload = decodeJWT(token: token),
+                   let role = payload["role"] as? String {
+                    screen = (role == "admin") ? .panel : .explore
+                } else {
+                    // guest fallback
+                    screen = .explore
+                }
             }, onGoToSignup: {
                 screen = .signup
             })
+
         case .signup:
-            SignupScreen(onSignupSuccess: {
-                screen = .login
-            }, onGoToLogin: {
+            SignupScreen(
+                onSignupSuccess: {
+                    screen = .explore
+                },
+                onGoToLogin: {
+                    screen = .login
+                }
+            )
+
+        case .explore:
+            ExploreView(onLogout: {
+                UserDefaults.standard.removeObject(forKey: "auth_token")
                 screen = .login
             })
-        case .explore:
-            ExploreView()
+
+        case .panel:
+            HostPanelView(onLogout: {
+                UserDefaults.standard.removeObject(forKey: "auth_token")
+                screen = .login
+            })
         }
     }
 }
-
 
 #Preview {
     AuthRouterView()

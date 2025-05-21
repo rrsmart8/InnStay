@@ -88,6 +88,21 @@ struct LoginScreen: View {
             
             Spacer()
             
+            // Forgot Password
+            Button {
+                UserDefaults.standard.removeObject(forKey: "auth_token")
+                onLoginSuccess()
+            } label: {
+                Text("Continue as guest")
+                    .fontWeight(.semibold)
+                    .frame(maxWidth: .infinity, minHeight: 50)
+                    .background(.gray)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+            }
+            
+            Spacer()
+            
             // Signup prompt
             HStack {
                 Text("Don't have an account?")
@@ -105,46 +120,53 @@ struct LoginScreen: View {
     
     
     private func performLogin() {
-          guard let url = URL(string: "http://127.0.0.1:5000/api/auth/login") else {
-              print("Invalid URL")
-              return
-          }
+        guard let url = URL(string: "http://127.0.0.1:5000/api/auth/login") else {
+            print("Invalid URL")
+            return
+        }
 
-          let body: [String: String] = [
-              "email": email,
-              "password": password
-          ]
+        let body: [String: String] = [
+            "email": email,
+            "password": password
+        ]
 
-          var request = URLRequest(url: url)
-          request.httpMethod = "POST"
-          request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
-          do {
-              request.httpBody = try JSONEncoder().encode(body)
-          } catch {
-              print("Encoding error:", error)
-              return
-          }
+        do {
+            request.httpBody = try JSONEncoder().encode(body)
+        } catch {
+            print("Encoding error:", error)
+            return
+        }
 
-          URLSession.shared.dataTask(with: request) { data, response, error in
-              if let error = error {
-                  print("Login error:", error)
-                  return
-              }
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Login error:", error)
+                return
+            }
 
-              guard let httpResponse = response as? HTTPURLResponse else { return }
+            guard let data = data else { return }
 
-              if httpResponse.statusCode == 200 {
-                  DispatchQueue.main.async {
-                      onLoginSuccess()
-                  }
-              } else {
-                  print("Login failed with status code:", httpResponse.statusCode)
-              }
-          }.resume()
-      }
-    
-    
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let token = json["access_token"] as? String {
+                    
+                    // Salvează tokenul în UserDefaults
+                    UserDefaults.standard.set(token, forKey: "auth_token")
+
+                    DispatchQueue.main.async {
+                        onLoginSuccess()
+                    }
+                } else {
+                    print("Token not found in response.")
+                }
+            } catch {
+                print("Failed to parse login response:", error)
+            }
+        }.resume()
+    }
 }
 
 

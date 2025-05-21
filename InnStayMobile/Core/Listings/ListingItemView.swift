@@ -36,7 +36,6 @@ struct ListingItemView: View {
                         .fontWeight(.semibold)
                         .foregroundStyle(.black)
 
-                    Text("Nov 3 - 10") // hardcoded example
 
                     HStack(spacing: 4) {
                         Text("$\(Int(listing.price_per_night))")
@@ -47,12 +46,12 @@ struct ListingItemView: View {
                 }
 
                 Spacer()
-
-                HStack(spacing: 2) {
-                    Image(systemName: "star.fill")
-                    Text("4.86")
-                }
-                .foregroundStyle(.black)
+            // TODO: Add ratings when Victor repairs the database
+            //                HStack(spacing: 2) {
+            //                    Image(systemName: "star.fill")
+            //                    Text(String(format: "%.2f", listing.average_rating ?? 0.0))
+            //                }
+            //                .foregroundStyle(.black)
             }
             .font(.footnote)
         }
