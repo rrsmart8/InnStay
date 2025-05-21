@@ -1,28 +1,37 @@
 import SwiftUI
 
-import SwiftUI
-
 struct HostPanelView: View {
-    let onLogout: () -> Void
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = HostPanelViewModel()
+    let onLogout: () -> Void
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
+                // Top bar: Logout + Close
                 HStack {
-                    Button(action: {
+                    Button("Logout") {
                         onLogout()
-                    }) {
-                        Image(systemName: "arrow.left.circle.fill")
-                            .font(.title2)
-                            .foregroundColor(.black)
                     }
-                    .padding(.leading, 24)
+                    .foregroundColor(.red)
+                    .padding(.leading)
 
                     Spacer()
+
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "xmark")
+                            .foregroundStyle(.black)
+                            .background {
+                                Circle()
+                                    .fill(.white)
+                                    .frame(width: 32, height: 32)
+                            }
+                    }
+                    .padding(.trailing)
                 }
-                .padding()
+                .padding(.top, 24)
 
                 Text("Admin Panel")
                     .font(.largeTitle)
@@ -52,9 +61,33 @@ struct HostPanelView: View {
                                     booking.status == "pending" ? .orange : .red
                                 )
                         }
-                        .padding(.horizontal)
+
+                        if booking.status == "pending" {
+                            HStack(spacing: 16) {
+                                Button("Confirm") {
+                                    updateStatus(bookingID: booking.id, status: "confirmed")
+                                }
+                                .foregroundColor(.white)
+                                .padding(.vertical, 6)
+                                .padding(.horizontal, 16)
+                                .background(.green)
+                                .clipShape(Capsule())
+
+                                Button("Reject") {
+                                    updateStatus(bookingID: booking.id, status: "cancelled")
+                                }
+                                .foregroundColor(.white)
+                                .padding(.vertical, 6)
+                                .padding(.horizontal, 16)
+                                .background(.red)
+                                .clipShape(Capsule())
+                            }
+                            .padding(.top, 8)
+                        }
+
                         Divider()
                     }
+                    .padding(.horizontal)
                 }
             }
         }
@@ -66,25 +99,20 @@ struct HostPanelView: View {
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
     }
-    
-    private func updateStatus(for bookingID: Int, to newStatus: String) {
-        guard let token = UserDefaults.standard.string(forKey: "auth_token") else {
-            print("No token available")
-            return
-        }
 
-        AdminService.updateBookingStatus(token: token, bookingID: bookingID, status: newStatus) { result in
-            switch result {
-            case .success:
-                DispatchQueue.main.async {
+    func updateStatus(bookingID: Int, status: String) {
+        guard let token = UserDefaults.standard.string(forKey: "auth_token") else { return }
+
+        AdminService.updateBookingStatus(token: token, bookingID: bookingID, status: status) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let msg):
+                    print(msg)
                     viewModel.fetchAdminBookings()
+                case .failure(let error):
+                    print("Status update failed:", error.localizedDescription)
                 }
-            case .failure(let error):
-                print("Status update failed:", error.localizedDescription)
             }
         }
     }
-
 }
-
-   
