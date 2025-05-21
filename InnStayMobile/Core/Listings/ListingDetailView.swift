@@ -13,14 +13,11 @@ struct ListingDetailView: View {
     @State private var checkInDate = Date()
     @State private var checkOutDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
     @State private var guests = 1
-    @State private var isBookingSuccess = false
-
     @State private var guestName = ""
     @State private var guestEmail = ""
 
-    private var isLoggedIn: Bool {
-        UserDefaults.standard.string(forKey: "auth_token") != nil
-    }
+    @State private var showAlert = false
+    @State private var alertMessage = ""
 
     var body: some View {
         ScrollView {
@@ -30,11 +27,7 @@ struct ListingDetailView: View {
                     case .empty:
                         ProgressView().frame(height: 320)
                     case .success(let image):
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .frame(height: 320)
-                            .clipped()
+                        image.resizable().scaledToFill().frame(height: 320).clipped()
                     case .failure:
                         Color.gray.frame(height: 320)
                     @unknown default:
@@ -48,33 +41,24 @@ struct ListingDetailView: View {
                 } label: {
                     Image(systemName: "chevron.left")
                         .foregroundStyle(.black)
-                        .background(
-                            Circle()
-                                .fill(.white)
-                                .frame(width: 32, height: 32)
-                        )
+                        .background {
+                            Circle().fill(.white).frame(width: 32, height: 32)
+                        }
                         .padding(32)
                 }
-                .padding(32)
+                .padding()
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("Room \(listing.room_number) - \(listing.room_type)")
-                    .font(.title)
-                    .fontWeight(.semibold)
-
-                Text(listing.hotel_location)
-                    .font(.subheadline)
-                    .foregroundStyle(.gray)
+                Text("Room \(listing.room_number) - \(listing.room_type)").font(.title).fontWeight(.semibold)
+                Text(listing.hotel_location).font(.subheadline).foregroundStyle(.gray)
             }
             .padding()
 
             Divider()
 
             VStack(alignment: .leading, spacing: 16) {
-                Text("Room Information")
-                    .font(.headline)
-
+                Text("Room Information").font(.headline)
                 Text("Type: \(listing.room_type)")
                 Text("Price: $\(Int(listing.price_per_night)) per night")
                 Text("Status: \(listing.status.capitalized)")
@@ -85,19 +69,14 @@ struct ListingDetailView: View {
             Divider()
 
             VStack(alignment: .leading, spacing: 16) {
-                Text("Reservation Details")
-                    .font(.headline)
-                    .padding(12)
+                Text("Reservation Details").font(.headline).padding(12)
 
-                DatePicker("Check In", selection: $checkInDate, displayedComponents: .date)
-                    .padding(12)
-                DatePicker("Check Out", selection: $checkOutDate, displayedComponents: .date)
-                    .padding(12)
+                DatePicker("Check In", selection: $checkInDate, displayedComponents: .date).padding(12)
+                DatePicker("Check Out", selection: $checkOutDate, displayedComponents: .date).padding(12)
 
-                Stepper("Guests: \(guests)", value: $guests, in: 1...6)
-                    .padding(12)
+                Stepper("Guests: \(guests)", value: $guests, in: 1...6).padding(12)
 
-                if !isLoggedIn {
+                if UserDefaults.standard.string(forKey: "auth_token") == nil {
                     TextField("Your Name", text: $guestName)
                         .padding(12)
                         .background(Color(.systemGray6))
@@ -116,8 +95,7 @@ struct ListingDetailView: View {
             Divider()
 
             VStack(alignment: .leading, spacing: 16) {
-                Text("Where you'll be")
-                    .font(.headline)
+                Text("Where you'll be").font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal)
 
@@ -132,66 +110,19 @@ struct ListingDetailView: View {
         .padding(.bottom, 64)
         .overlay(alignment: .bottom) {
             VStack {
-                Divider()
-                    .padding(.bottom)
+                Divider().padding(.bottom)
 
                 HStack {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("$\(Int(listing.price_per_night))")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-
-                        Text("Total before taxes")
-                            .font(.footnote)
+                        Text("$\(Int(listing.price_per_night))").font(.subheadline).fontWeight(.semibold)
+                        Text("Total before taxes").font(.footnote)
                     }
                     .padding(.leading)
 
                     Spacer()
 
                     Button {
-                        let formatter = DateFormatter()
-                        formatter.dateFormat = "yyyy-MM-dd"
-
-                        if isLoggedIn {
-                            // logged-in user
-                            let request = BookingRequest(
-                                room_id: listing.id,
-                                guests: guests,
-                                check_in_date: formatter.string(from: checkInDate),
-                                check_out_date: formatter.string(from: checkOutDate)
-                            )
-                            if let token = UserDefaults.standard.string(forKey: "auth_token") {
-                                BookingService.bookRoomAsUser(token: token, request: request) { result in
-                                    switch result {
-                                    case .success(let msg):
-                                        print(msg)
-                                        isBookingSuccess = true
-                                    case .failure(let error):
-                                        print("Booking failed:", error.localizedDescription)
-                                    }
-                                }
-                            }
-                        } else {
-                            // guest user
-                            let guestRequest = GuestBookingRequest(
-                                room_id: listing.id,
-                                guest_name: guestName,
-                                guest_email: guestEmail,
-                                guests: guests,
-                                check_in_date: formatter.string(from: checkInDate),
-                                check_out_date: formatter.string(from: checkOutDate)
-                            )
-
-                            BookingService.bookRoomAsGuest(request: guestRequest) { result in
-                                switch result {
-                                case .success(let msg):
-                                    print(msg)
-                                    isBookingSuccess = true
-                                case .failure(let error):
-                                    print("Guest booking failed:", error.localizedDescription)
-                                }
-                            }
-                        }
+                        reserveRoom()
                     } label: {
                         Text("Reserve")
                             .foregroundColor(.white)
@@ -206,6 +137,58 @@ struct ListingDetailView: View {
                 .padding(.horizontal, 42)
             }
             .background(.white)
+        }
+        .alert("Reservation", isPresented: $showAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(alertMessage)
+        }
+    }
+
+    func reserveRoom() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+
+        let booking = BookingRequest(
+            room_id: listing.id,
+            guests: guests,
+            check_in_date: formatter.string(from: checkInDate),
+            check_out_date: formatter.string(from: checkOutDate)
+        )
+
+        if let token = UserDefaults.standard.string(forKey: "auth_token") {
+            BookingService.bookRoomAsUser(token: token, request: booking) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        alertMessage = "Booking placed successfully!"
+                    case .failure(let err):
+                        alertMessage = "Failed to book: \(err.localizedDescription)"
+                    }
+                    showAlert = true
+                }
+            }
+        } else {
+            let guestBooking = GuestBookingRequest(
+                room_id: booking.room_id,
+                guests: booking.guests,
+                check_in_date: booking.check_in_date,
+                check_out_date: booking.check_out_date,
+                guest_name: guestName,
+                guest_email: guestEmail
+            )
+
+            BookingService.bookRoomAsGuest(request: guestBooking) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        alertMessage = "Guest booking placed successfully!"
+                    case .failure(let err):
+                        alertMessage = "Failed to book: \(err.localizedDescription)"
+                    }
+                    showAlert = true
+                }
+            }
         }
     }
 }

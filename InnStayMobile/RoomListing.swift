@@ -1,5 +1,3 @@
-import Foundation
-
 struct RoomListing: Codable, Identifiable, Hashable {
     let id: Int
     let hotel_id: Int
@@ -10,4 +8,5 @@ struct RoomListing: Codable, Identifiable, Hashable {
     let price_per_night: Double
     let status: String
     let image: String
+    let average_rating: Double? // 🔥 new field
 }
