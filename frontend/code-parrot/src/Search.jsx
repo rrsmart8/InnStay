@@ -88,7 +88,7 @@ function Search() {
                 <div className="result-card" key={hotel.id}>
                   {hotel.image ? (
                     <img
-                      src={`http://localhost:5000${hotel.image}`}
+                      src={`http://127.0.0.15000${hotel.image}`}
                       alt={hotel.name}
                       style={{ width: "100%", height: "180px", objectFit: "cover" }}
                     />

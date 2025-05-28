@@ -37,7 +37,7 @@ function MyBookings() {
             {bookings.map(booking => (
               <div className="booking-card" key={booking.id}>
                 <img
-                  src={`http://localhost:5000${booking.room_image}`}
+                  src={`http://127.0.0.1:5000${booking.room_image}`}
                   alt={booking.room_type}
                   className="booking-image"
                 />

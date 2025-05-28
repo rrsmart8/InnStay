@@ -180,7 +180,7 @@ function View() {
 
         <img
           className="main-image"
-          src={`http://localhost:5000${hotel.image}`}
+          src={`http://127.0.0.1:5000${hotel.image}`}
           alt={hotel.name}
         />
 
@@ -201,7 +201,7 @@ function View() {
                   >
                     <img
                       className="room-image"
-                      src={`http://localhost:5000${room.image}`}
+                      src={`http://127.0.0.1:5000${room.image}`}
                       alt={room.room_type}
                     />
                     <div className="room-info">

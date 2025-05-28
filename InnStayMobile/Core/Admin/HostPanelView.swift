@@ -15,6 +15,7 @@ struct HostPanelView: View {
                     }
                     .foregroundColor(.red)
                     .padding(.leading)
+                    .padding(.top, 16)
 
                     Spacer()
 

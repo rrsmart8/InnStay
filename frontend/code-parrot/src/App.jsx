@@ -78,7 +78,7 @@ function Home() {
                   : null);
               return (
                 <div className="listing-card" key={hotel.id}>
-                  <img src={`http://localhost:5000${hotel.image}`} alt={hotel.name} />
+                  <img src={`http://127.0.0.1:5000${hotel.image}`} alt={hotel.name} />
                   <div className="listing-info">
                     <h3>{hotel.name}</h3>
                     {minPrice !== null && minPrice !== undefined && (
