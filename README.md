@@ -350,10 +350,6 @@ All user sessions are authenticated with JWT tokens passed in `Authorization: Be
 - All models are defined in `models.py`
 - Admin role users can manage bookings through `/api/bookings/admin`
 
-
-Understood!
-Here is the complete clean Markdown, in the same format as your example (with correct bash blocks, separators, consistent):
-
 ⸻
 
 
